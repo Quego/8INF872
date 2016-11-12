@@ -2,8 +2,8 @@ package bfor8inf972.b_for;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import com.facebook.FacebookSdk;
 
+//TODO JAVADOC
 public class MainActivity extends AppCompatActivity {
 
     @Override

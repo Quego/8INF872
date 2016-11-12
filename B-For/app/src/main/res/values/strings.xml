@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">B-For</string>
+
     <string name="facebook_app_id">1135925373111851</string>
+
+    <string name="authentication_hello">Hello ! Welcome to B-For</string>
+    <string name="authentication_not_connected">Not connected</string>
 </resources>
