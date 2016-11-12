@@ -9,7 +9,6 @@ import com.facebook.login.widget.LoginButton;
 
 import java.util.logging.Logger;
 
-import bfor8inf972.b_for.MainActivity;
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.controller.ApplicationController;
 import bfor8inf972.b_for.representation.User;
@@ -76,13 +75,13 @@ public class AuthenticationActivity extends AppCompatActivity {
      */
     public void launchMainActivity(User user) {
 
-       // Intent intent = new Intent(this, MainActivity.class);
+       Intent intent = new Intent(this, HomeActivity.class);
 
         if(user != null) {
             //TODO COMPLETE
             ApplicationController.getInstance().getUserController().addUser(user, this);
         }
 
-       // startActivity(intent);
+       startActivity(intent);
     }
 }

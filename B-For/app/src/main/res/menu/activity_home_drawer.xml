@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Profil" />
+        <item
+            android:id="@+id/nav_findEvent"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Trouver un évènement" />
+        <item
+            android:id="@+id/nav_createEvent"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Créer un évènement" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Paramètres" />
+        <item
+            android:id="@+id/nav_cgu"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="C.G.U" />
+    </group>
+</menu>
