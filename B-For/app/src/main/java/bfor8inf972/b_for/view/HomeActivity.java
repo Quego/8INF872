@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity
         TermOfUseFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
         ManageEvents.OnFragmentInteractionListener,
+        OverviewFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
     private ManageEvents manageEventsFragment;
@@ -32,6 +33,8 @@ public class HomeActivity extends AppCompatActivity
     private ProfilFragment profilFragment;
     private SettingsFragment settingFragment;
     private TermOfUseFragment termOfUseFragment;
+    private OverviewFragment overviewFragment;
+
     private String currentFragmentName;
 
     public HomeActivity(){
@@ -40,6 +43,8 @@ public class HomeActivity extends AppCompatActivity
         profilFragment = new ProfilFragment();
         settingFragment = new SettingsFragment();
         termOfUseFragment = new TermOfUseFragment();
+        overviewFragment = new OverviewFragment();
+
         currentFragmentName=null;
     }
 
@@ -63,9 +68,9 @@ public class HomeActivity extends AppCompatActivity
         //replace fragment only if it's first time on activity
         if(savedInstanceState==null) {
             getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, profilFragment)
+                    replace(R.id.FragmentContainer, overviewFragment)
                     .commit();
-            currentFragmentName=getResources().getString(R.string.profil_title);
+            currentFragmentName=getResources().getString(R.string.overview_title);
         }
 
         //get restored data
@@ -124,6 +129,13 @@ public class HomeActivity extends AppCompatActivity
                     replace(R.id.FragmentContainer, findEventFragment)
                     .commit();
             currentFragmentName=getResources().getString(R.string.findEvent_title);
+        }
+        else if(id == R.id.nav_overview)
+        {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.FragmentContainer, overviewFragment)
+                    .commit();
+            currentFragmentName=getResources().getString(R.string.overview_title);
         }
 
         getSupportActionBar().setTitle(currentFragmentName);

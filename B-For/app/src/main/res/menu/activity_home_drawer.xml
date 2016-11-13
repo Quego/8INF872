@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_profil"
-            android:icon="@android:drawable/ic_menu_edit"
-            android:title="@string/profil_title" />
+            android:id="@+id/nav_overview"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="@string/overview_title" />
         <item
             android:id="@+id/nav_findEvent"
             android:icon="@android:drawable/ic_menu_search"
@@ -14,6 +14,10 @@
             android:id="@+id/nav_manageEvent"
             android:icon="@android:drawable/ic_menu_add"
             android:title="@string/manageEvent_title"/>
+        <item
+            android:id="@+id/nav_profil"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="@string/profil_title" />
         <item
             android:id="@+id/nav_settings"
             android:icon="@android:drawable/ic_menu_manage"

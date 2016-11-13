@@ -20,4 +20,5 @@
     <string name="termOfUse_title">C.G.U</string>
     <string name="addEvent_title">Create Event</string>
     <string name="search_bar">Chercher évènement, lieu ...</string>
+    <string name="overview_title">Vue d\'ensemble</string>
 </resources>
