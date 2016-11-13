@@ -79,6 +79,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
         if(user != null) {
             //TODO COMPLETE
+            intent.putExtra("User", user);
             ApplicationController.getInstance().getUserController().addUser(user, this);
         }
 

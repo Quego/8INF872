@@ -13,10 +13,15 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.representation.User;
 
 public class HomeActivity extends AppCompatActivity
         implements ProfilFragment.OnFragmentInteractionListener,
@@ -34,6 +39,7 @@ public class HomeActivity extends AppCompatActivity
     private SettingsFragment settingFragment;
     private TermOfUseFragment termOfUseFragment;
     private OverviewFragment overviewFragment;
+    private User user;
 
     private String currentFragmentName;
 
@@ -48,37 +54,51 @@ public class HomeActivity extends AppCompatActivity
         currentFragmentName=null;
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            setContentView(R.layout.activity_home);
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-            setSupportActionBar(toolbar);
+        user = (User) getIntent().getSerializableExtra("User");
 
-            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-            drawer.setDrawerListener(toggle);
-            toggle.syncState();
+        setContentView(R.layout.activity_home);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-            navigationView.setNavigationItemSelectedListener(this);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        InitialiseTextUserInfo(navigationView.getHeaderView(0));
 
         //replace fragment only if it's first time on activity
-        if(savedInstanceState==null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, overviewFragment)
                     .commit();
-            currentFragmentName=getResources().getString(R.string.overview_title);
+            currentFragmentName = getResources().getString(R.string.overview_title);
         }
 
         //get restored data
-        if(savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             currentFragmentName = savedInstanceState.getString("currentFragmentName");
         }
-
         getSupportActionBar().setTitle(currentFragmentName);
+    }
+
+    private void InitialiseTextUserInfo(View v){
+        TextView firstName = (TextView) v.findViewById(R.id.first_name);
+        TextView lastName = (TextView) v.findViewById(R.id.last_name);
+
+        if(user!=null) {
+            firstName.setText(user.getFirstName());
+            lastName.setText(user.getLastName());
+        }
     }
 
     @Override
