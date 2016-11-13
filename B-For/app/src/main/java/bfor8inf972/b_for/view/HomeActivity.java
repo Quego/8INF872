@@ -27,12 +27,12 @@ public class HomeActivity extends AppCompatActivity
         ManageEvents.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
-    ManageEvents manageEventsFragment;
-    FindEventFragment findEventFragment;
-    ProfilFragment profilFragment;
-    SettingsFragment settingFragment;
-    TermOfUseFragment termOfUseFragment;
-    Fragment previousFragment;
+    private ManageEvents manageEventsFragment;
+    private FindEventFragment findEventFragment;
+    private ProfilFragment profilFragment;
+    private SettingsFragment settingFragment;
+    private TermOfUseFragment termOfUseFragment;
+
 
     public HomeActivity(){
         manageEventsFragment = new ManageEvents();
@@ -45,23 +45,26 @@ public class HomeActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+            setContentView(R.layout.activity_home);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.setDrawerListener(toggle);
+            toggle.syncState();
 
+            NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+            navigationView.setNavigationItemSelectedListener(this);
 
-        getSupportFragmentManager().beginTransaction().
-                add(R.id.FragmentContainer, profilFragment)
-                .commit();
+        //replace fragment only if it's first time on activity
+        if(savedInstanceState==null) {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.FragmentContainer, profilFragment)
+                    .commit();
+        }
 
     }
 
