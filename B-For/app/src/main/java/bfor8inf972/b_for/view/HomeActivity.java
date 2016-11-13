@@ -3,6 +3,7 @@ package bfor8inf972.b_for.view;
 
 
 
+import android.app.Fragment;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -22,16 +23,18 @@ public class HomeActivity extends AppCompatActivity
         FindEventFragment.OnFragmentInteractionListener,
         TermOfUseFragment.OnFragmentInteractionListener,
         SettingsFragment.OnFragmentInteractionListener,
+        ManageEvents.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener {
 
-    CreateEventFragment createEventFragment;
+    ManageEvents manageEventsFragment;
     FindEventFragment findEventFragment;
     ProfilFragment profilFragment;
     SettingsFragment settingFragment;
     TermOfUseFragment termOfUseFragment;
+    Fragment previousFragment;
 
     public HomeActivity(){
-        createEventFragment = new CreateEventFragment();
+        manageEventsFragment = new ManageEvents();
         findEventFragment = new FindEventFragment();
         profilFragment = new ProfilFragment();
         settingFragment = new SettingsFragment();
@@ -100,26 +103,22 @@ public class HomeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_profil) {
-                getSupportFragmentManager().beginTransaction().
-                        replace(R.id.FragmentContainer, profilFragment)
-                        .commit();
-            // Handle the camera action
-        } else if (id == R.id.nav_cgu) {
+            getSupportFragmentManager().beginTransaction().
+                    replace(R.id.FragmentContainer, profilFragment)
+                    .commit();
+        } else if (id == R.id.nav_termOfUse) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, termOfUseFragment)
                     .commit();
-        }
-        else if (id == R.id.nav_createEvent) {
+        } else if (id == R.id.nav_manageEvent) {
             getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, createEventFragment)
+                    replace(R.id.FragmentContainer, manageEventsFragment)
                     .commit();
-        }
-        else if (id == R.id.nav_settings) {
+        } else if (id == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, settingFragment)
                     .commit();
-        }
-        else if (id == R.id.nav_findEvent) {
+        } else if (id == R.id.nav_findEvent) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, findEventFragment)
                     .commit();
