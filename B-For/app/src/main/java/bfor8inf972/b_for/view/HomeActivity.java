@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity
     private ProfilFragment profilFragment;
     private SettingsFragment settingFragment;
     private TermOfUseFragment termOfUseFragment;
-
+    private String currentFragmentName;
 
     public HomeActivity(){
         manageEventsFragment = new ManageEvents();
@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity
         profilFragment = new ProfilFragment();
         settingFragment = new SettingsFragment();
         termOfUseFragment = new TermOfUseFragment();
+        currentFragmentName=null;
     }
 
     @Override
@@ -64,9 +65,23 @@ public class HomeActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, profilFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.profil_title);
         }
 
+        //get restored data
+        if(savedInstanceState!=null) {
+            currentFragmentName = savedInstanceState.getString("currentFragmentName");
+        }
+
+        getSupportActionBar().setTitle(currentFragmentName);
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putString("currentFragmentName", currentFragmentName);
+        super.onSaveInstanceState(savedInstanceState);
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -88,23 +103,30 @@ public class HomeActivity extends AppCompatActivity
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, profilFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.profil_title);
         } else if (id == R.id.nav_termOfUse) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, termOfUseFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.termOfUse_title);
         } else if (id == R.id.nav_manageEvent) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, manageEventsFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.manageEvent_title);
         } else if (id == R.id.nav_settings) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, settingFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.settings_title);
         } else if (id == R.id.nav_findEvent) {
             getSupportFragmentManager().beginTransaction().
                     replace(R.id.FragmentContainer, findEventFragment)
                     .commit();
+            currentFragmentName=getResources().getString(R.string.findEvent_title);
         }
+
+        getSupportActionBar().setTitle(currentFragmentName);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -19,4 +19,5 @@
     <string name="settings_title">Paramètres</string>
     <string name="termOfUse_title">C.G.U</string>
     <string name="addEvent_title">Create Event</string>
+    <string name="search_bar">Chercher évènement, lieu ...</string>
 </resources>
