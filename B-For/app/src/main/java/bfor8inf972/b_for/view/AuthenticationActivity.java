@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import bfor8inf972.b_for.R;
@@ -39,9 +40,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         /* Management of the facebook sign in button. */
-        LoginButton fbLoginButton = (LoginButton) findViewById(R.id.login_button);
-        fbLoginButton.setReadPermissions("user_friends");
-        fbLoginButton.registerCallback(callbackManager, this.authenticationFacebook.facebookCallbackManager);
+        LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
+        loginButton.setReadPermissions(Arrays.asList(
+                "public_profile", "email", "user_birthday", "user_friends", "user_location"));
+        loginButton.registerCallback(callbackManager, this.authenticationFacebook.facebookCallbackManager);
     }
 
     /**{@inheritDoc}*/
