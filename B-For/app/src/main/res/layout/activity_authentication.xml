@@ -16,31 +16,12 @@
         android:gravity="center"
         android:id="@+id/welcome_text_view" />
 
-    <Space
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.2"/>
-
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3" />
-
     <com.facebook.login.widget.LoginButton
-        android:id="@+id/fb_login_button"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:paddingTop="15sp"
-        android:paddingBottom="15sp"
-        android:textSize="20sp"/>
-
-    <Button
-        android:id="@+id/not_connected_button"
-        android:text="@string/authentication_not_connected"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp" />
 
 </LinearLayout>

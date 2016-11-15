@@ -39,7 +39,7 @@ public class AuthenticationActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
 
         /* Management of the facebook sign in button. */
-        LoginButton fbLoginButton = (LoginButton) findViewById(R.id.fb_login_button);
+        LoginButton fbLoginButton = (LoginButton) findViewById(R.id.login_button);
         fbLoginButton.setReadPermissions("user_friends");
         fbLoginButton.registerCallback(callbackManager, this.authenticationFacebook.facebookCallbackManager);
     }
