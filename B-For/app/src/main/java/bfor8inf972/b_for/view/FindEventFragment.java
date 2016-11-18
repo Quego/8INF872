@@ -127,51 +127,13 @@ public class FindEventFragment extends Fragment {
         // add data for displaying in expandable list view
         loadData();
 
-
-        //get reference of the ExpandableListView
         simpleExpandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.simpleExpandableListView);
         listAdapter = new ExpandableViewCustomAdapter(getContext(), eventList);
         simpleExpandableListView.setAdapter(listAdapter);
 
-        // setOnChildClickListener listener for child row click
-        simpleExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
-                //get the group header
-                EventChild headerInfo = eventList.get(groupPosition);
-                //get the child info
-                EventParent detailInfo = headerInfo.getChild();
-                return false;
-            }
-        });
-        // setOnGroupClickListener listener for group heading click
-        simpleExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                //get the group header
-                EventChild headerInfo = eventList.get(groupPosition);
-                return false;
-            }
-        });
-
         return myFragmentView;
     }
 
-    //method to expand all groups
-    private void expandAll() {
-        int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            simpleExpandableListView.expandGroup(i);
-        }
-    }
-
-    //method to collapse all groups
-    private void collapseAll() {
-        int count = listAdapter.getGroupCount();
-        for (int i = 0; i < count; i++) {
-            simpleExpandableListView.collapseGroup(i);
-        }
-    }
 
     private void loadData() {
         eventList.clear();
