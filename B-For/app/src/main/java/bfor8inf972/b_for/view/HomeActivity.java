@@ -3,8 +3,6 @@ package bfor8inf972.b_for.view;
 
 
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -15,17 +13,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.Profile;
 import com.facebook.login.widget.ProfilePictureView;
-
-import java.io.InputStream;
-import java.net.URL;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.representation.User;
+import bfor8inf972.b_for.view.Fragments.CreateEventFragment;
+import bfor8inf972.b_for.view.Fragments.FindEventFragment;
+import bfor8inf972.b_for.view.Fragments.ManageEvents;
+import bfor8inf972.b_for.view.Fragments.OverviewFragment;
+import bfor8inf972.b_for.view.Fragments.ProfilFragment;
+import bfor8inf972.b_for.view.Fragments.SettingsFragment;
+import bfor8inf972.b_for.view.Fragments.TermOfUseFragment;
 
 public class HomeActivity extends AppCompatActivity
         implements ProfilFragment.OnFragmentInteractionListener,

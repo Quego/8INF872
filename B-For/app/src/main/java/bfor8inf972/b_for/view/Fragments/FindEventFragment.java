@@ -1,4 +1,4 @@
-package bfor8inf972.b_for.view;
+package bfor8inf972.b_for.view.Fragments;
 
 import android.content.Context;
 import android.net.Uri;

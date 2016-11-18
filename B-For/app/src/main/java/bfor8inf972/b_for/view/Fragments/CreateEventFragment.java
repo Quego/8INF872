@@ -1,4 +1,4 @@
-package bfor8inf972.b_for.view;
+package bfor8inf972.b_for.view.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,21 +10,20 @@ import android.view.ViewGroup;
 
 import bfor8inf972.b_for.R;
 
-public class TermOfUseFragment extends Fragment {
+public class CreateEventFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public TermOfUseFragment() {
+    public CreateEventFragment() {
         // Required empty public constructor
     }
 
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
-     *
      **/
-    public static TermOfUseFragment newInstance(String param1, String param2) {
-        TermOfUseFragment fragment = new TermOfUseFragment();
+    public static CreateEventFragment newInstance(String param1, String param2) {
+        CreateEventFragment fragment = new CreateEventFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -41,9 +40,14 @@ public class TermOfUseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_term_of_use, container, false);
+        return inflater.inflate(R.layout.fragment_create_event, container, false);
     }
 
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -66,7 +70,8 @@ public class TermOfUseFragment extends Fragment {
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
-     * activity.**/
+     * activity.
+     **/
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }

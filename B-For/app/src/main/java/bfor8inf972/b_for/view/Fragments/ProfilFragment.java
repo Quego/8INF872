@@ -1,4 +1,4 @@
-package bfor8inf972.b_for.view;
+package bfor8inf972.b_for.view.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 
 import bfor8inf972.b_for.R;
 
-public class SettingsFragment extends Fragment {
+
+public class ProfilFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public SettingsFragment() {
+    public ProfilFragment() {
         // Required empty public constructor
     }
 
@@ -22,9 +23,10 @@ public class SettingsFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      */
-    public static SettingsFragment newInstance(String param1, String param2) {
-        SettingsFragment fragment = new SettingsFragment();
+    public static ProfilFragment newInstance(String param1, String param2) {
+        ProfilFragment fragment = new ProfilFragment();
         Bundle args = new Bundle();
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,8 +42,9 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        return inflater.inflate(R.layout.fragment_profil, container, false);
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -64,7 +67,8 @@ public class SettingsFragment extends Fragment {
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
-     * activity.*/
+     * activity.
+     */
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
