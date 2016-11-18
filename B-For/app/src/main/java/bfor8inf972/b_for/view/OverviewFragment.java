@@ -7,13 +7,24 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+
+import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.view.expandable.EventChild;
+import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
 
 
 public class OverviewFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
+
+
+    private ExpandableViewCustomAdapter listAdapter;
+    private ExpandableListView simpleExpandableListView;
+    private ArrayList<EventChild> eventList = new ArrayList<EventChild>();
+
 
     public OverviewFragment() {
         // Required empty public constructor
@@ -42,7 +53,11 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_overview, container, false);
+        View myFragmentView = inflater.inflate(R.layout.fragment_overview, container, false);
+
+
+
+        return myFragmentView;
     }
 
 
