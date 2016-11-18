@@ -13,7 +13,7 @@
             android:id="@+id/event_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="title"
+            android:text="title"
             android:paddingLeft="35sp"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textStyle="bold" />
@@ -23,7 +23,7 @@
             android:id="@+id/event_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="date"
+            android:text="date"
             android:paddingLeft="35sp"
             android:textStyle="bold" />
 
@@ -34,7 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="right|center_vertical"
-        android:hint="distance" />
+        android:text="distance" />
 
 
 </LinearLayout>
