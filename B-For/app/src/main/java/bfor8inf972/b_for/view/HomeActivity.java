@@ -3,22 +3,26 @@ package bfor8inf972.b_for.view;
 
 
 
-import android.app.Fragment;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.facebook.Profile;
+import com.facebook.login.widget.ProfilePictureView;
+
+import java.io.InputStream;
+import java.net.URL;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.representation.User;
@@ -74,7 +78,7 @@ public class HomeActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        InitialiseTextUserInfo(navigationView.getHeaderView(0));
+        InitialiseUserInfo(navigationView.getHeaderView(0));
 
         //replace fragment only if it's first time on activity
         if (savedInstanceState == null) {
@@ -91,15 +95,17 @@ public class HomeActivity extends AppCompatActivity
         getSupportActionBar().setTitle(currentFragmentName);
     }
 
-    private void InitialiseTextUserInfo(View v){
+    private void InitialiseUserInfo(View v){
         TextView firstName = (TextView) v.findViewById(R.id.first_name);
         TextView lastName = (TextView) v.findViewById(R.id.last_name);
-
+        ProfilePictureView profilePictureView =(ProfilePictureView) v.findViewById(R.id.picture_profile);
         if(user!=null) {
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
+            profilePictureView.setProfileId(user.getId());
         }
     }
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {

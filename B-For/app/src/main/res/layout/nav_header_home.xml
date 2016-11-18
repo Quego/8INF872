@@ -13,26 +13,51 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="B-For"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
 
-    <TextView
-        android:id="@+id/first_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Prénom"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
-    <TextView
-        android:id="@+id/last_name"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nom" />
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <com.facebook.login.widget.ProfilePictureView
+            android:id="@+id/picture_profile"
+            android:layout_width="50sp"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10sp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Prénom"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+            <TextView
+                android:id="@+id/last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="0px"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="Nom" />
+        </LinearLayout>
+    </LinearLayout>
+
 
 </LinearLayout>
