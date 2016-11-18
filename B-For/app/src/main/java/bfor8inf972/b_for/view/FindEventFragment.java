@@ -11,9 +11,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
+import bfor8inf972.b_for.view.expandable.EventParent;
+import bfor8inf972.b_for.view.expandable.EventChild;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,12 +43,13 @@ public class FindEventFragment extends Fragment {
     private String searchRequest;
 
     private OnFragmentInteractionListener mListener;
+    private ExpandableViewCustomAdapter listAdapter;
+    private ExpandableListView simpleExpandableListView;
+    private ArrayList<EventChild> eventList = new ArrayList<EventChild>();
 
     public FindEventFragment() {
-        searchView=null;
+        searchView = null;
     }
-
-
 
 
     @Override
@@ -56,7 +64,7 @@ public class FindEventFragment extends Fragment {
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
 
-        if(savedInstanceState!=null) {
+        if (savedInstanceState != null) {
             searchRequest = savedInstanceState.getString("searchRequest");
         }
         super.onViewStateRestored(savedInstanceState);
@@ -75,6 +83,8 @@ public class FindEventFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                Toast toast = Toast.makeText(getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                toast.show();
                 return false;
             }
 
@@ -103,6 +113,7 @@ public class FindEventFragment extends Fragment {
 
         }
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -134,9 +145,77 @@ public class FindEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find_event, container, false);
+        View myFragmentView = inflater.inflate(R.layout.fragment_find_event, container, false);
+
+        // add data for displaying in expandable list view
+        loadData();
+
+
+        //get reference of the ExpandableListView
+        simpleExpandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.simpleExpandableListView);
+        listAdapter = new ExpandableViewCustomAdapter(getContext(), eventList);
+        simpleExpandableListView.setAdapter(listAdapter);
+
+        // setOnChildClickListener listener for child row click
+        simpleExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+                //get the group header
+                EventChild headerInfo = eventList.get(groupPosition);
+                //get the child info
+                EventParent detailInfo = headerInfo.getChild();
+                return false;
+            }
+        });
+        // setOnGroupClickListener listener for group heading click
+        simpleExpandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+                //get the group header
+                EventChild headerInfo = eventList.get(groupPosition);
+                return false;
+            }
+        });
+
+        return myFragmentView;
     }
+
+    //method to expand all groups
+    private void expandAll() {
+        int count = listAdapter.getGroupCount();
+        for (int i = 0; i < count; i++) {
+            simpleExpandableListView.expandGroup(i);
+        }
+    }
+
+    //method to collapse all groups
+    private void collapseAll() {
+        int count = listAdapter.getGroupCount();
+        for (int i = 0; i < count; i++) {
+            simpleExpandableListView.collapseGroup(i);
+        }
+    }
+
+    private void loadData() {
+        eventList.clear();
+        addEvent("Grosse fête ", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
+        addEvent("Soirée LAN", new Date(), "13 km", "Prenez vos manettes de Xbox et venez découvrir des jeux en local !");
+        addEvent("Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
+        addEvent("C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
+    }
+
+
+    private void addEvent(String name, Date date, String distance, String details) {
+
+        EventParent child = new EventParent(details, 2.5f);
+
+        //check the hash map if the group already exists
+        EventChild headerInfo = new EventChild(name, distance, date, child);
+
+        eventList.add(headerInfo);
+
+    }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

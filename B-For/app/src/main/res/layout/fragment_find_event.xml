@@ -5,16 +5,14 @@
     tools:context="bfor8inf972.b_for.view.FindEventFragment">
 
 
-    <LinearLayout
-        android:orientation="vertical"
+
+
+    <ExpandableListView
+
+        android:id="@+id/simpleExpandableListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:theme="@android:style/Theme.Holo.Light"/>
 
-        <ListView
-            android:id="@+id/all_events"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
 
 </FrameLayout>

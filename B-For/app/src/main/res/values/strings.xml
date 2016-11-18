@@ -21,4 +21,5 @@
     <string name="addEvent_title">Create Event</string>
     <string name="search_bar">Chercher évènement, lieu ...</string>
     <string name="overview_title">Vue d\'ensemble</string>
+    <string name="participate_button">Demande de participation</string>
 </resources>
