@@ -12,7 +12,7 @@ import android.widget.ExpandableListView;
 import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
-import bfor8inf972.b_for.view.expandable.EventChild;
+import bfor8inf972.b_for.view.expandable.EventParent;
 import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
 
 
@@ -23,7 +23,7 @@ public class OverviewFragment extends Fragment {
 
     private ExpandableViewCustomAdapter listAdapter;
     private ExpandableListView simpleExpandableListView;
-    private ArrayList<EventChild> eventList = new ArrayList<EventChild>();
+    private ArrayList<EventParent> eventList = new ArrayList<EventParent>();
 
 
     public OverviewFragment() {

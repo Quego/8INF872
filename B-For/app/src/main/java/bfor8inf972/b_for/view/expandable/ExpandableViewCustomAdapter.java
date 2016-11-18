@@ -21,20 +21,20 @@ import bfor8inf972.b_for.R;
 public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private ArrayList<EventChild> children;
+    private ArrayList<EventParent> parents;
 
-    public ExpandableViewCustomAdapter(Context context, ArrayList<EventChild> children) {
+    public ExpandableViewCustomAdapter(Context context, ArrayList<EventParent> parents) {
         this.context = context;
-        this.children = children;
+        this.parents = parents;
     }
 
     public void remove(int index) {
-        children.remove(index);
+        parents.remove(index);
     }
 
     @Override
     public int getGroupCount() {
-        return children.size();
+        return parents.size();
     }
 
     @Override
@@ -44,12 +44,12 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return children.get(groupPosition);
+        return parents.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        EventParent productList = children.get(groupPosition).getChild();
+        EventChild productList = parents.get(groupPosition).getChild();
         return productList;
     }
 
@@ -70,7 +70,7 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
-        EventChild currentChild = (EventChild) getGroup(groupPosition);
+        EventParent currentChild = (EventParent) getGroup(groupPosition);
         if (view == null) {
             LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inf.inflate(R.layout.expandable_event_parent, null);
@@ -91,7 +91,7 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
 
-        EventParent currentParent = (EventParent) getChild(groupPosition, childPosition);
+        EventChild currentParent = (EventChild) getChild(groupPosition, childPosition);
         if (view == null) {
             LayoutInflater layInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = layInflater.inflate(R.layout.expandable_event_child, null);

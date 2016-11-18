@@ -19,8 +19,8 @@ import java.util.Date;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
-import bfor8inf972.b_for.view.expandable.EventParent;
 import bfor8inf972.b_for.view.expandable.EventChild;
+import bfor8inf972.b_for.view.expandable.EventParent;
 
 
 public class FindEventFragment extends Fragment {
@@ -32,7 +32,7 @@ public class FindEventFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private ExpandableViewCustomAdapter listAdapter;
     private ExpandableListView simpleExpandableListView;
-    private ArrayList<EventChild> eventList = new ArrayList<EventChild>();
+    private ArrayList<EventParent> eventList = new ArrayList<EventParent>();
 
     public FindEventFragment() {
         searchView = null;
@@ -41,16 +41,13 @@ public class FindEventFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
-
         savedInstanceState.putString("searchRequest", searchRequest);
-
         super.onSaveInstanceState(savedInstanceState);
     }
 
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
-
         if (savedInstanceState != null) {
             searchRequest = savedInstanceState.getString("searchRequest");
         }
@@ -86,21 +83,6 @@ public class FindEventFragment extends Fragment {
             searchView.setQuery(searchRequest, false);
         }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-
-
-            default:
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item);
-
-        }
-    }
-
 
     public static FindEventFragment newInstance(String param1, String param2) {
         FindEventFragment fragment = new FindEventFragment();
@@ -146,13 +128,9 @@ public class FindEventFragment extends Fragment {
 
     private void addEvent(String name, Date date, String distance, String details) {
 
-        EventParent child = new EventParent(details, 2.5f);
-
-        //check the hash map if the group already exists
-        EventChild headerInfo = new EventChild(name, distance, date, child);
-
-        eventList.add(headerInfo);
-
+        EventChild child = new EventChild(details, 2.5f);
+        EventParent parent = new EventParent(name, distance, date, child);
+        eventList.add(parent);
     }
 
 
