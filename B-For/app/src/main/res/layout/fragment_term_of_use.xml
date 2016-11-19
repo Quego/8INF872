@@ -1,16 +1,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="bfor8inf972.b_for.view.Fragments.TermOfUseFragment">
-    
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="bfor8inf972.b_for.view.Fragments.TermOfUseFragment">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="10sp"
         android:layout_marginRight="10sp"
         android:gravity="center"
-        android:text="@string/termOfUse_text"
-        android:id="@+id/textView" />
+        android:text="@string/termOfUse_text" />
 
 </FrameLayout>
