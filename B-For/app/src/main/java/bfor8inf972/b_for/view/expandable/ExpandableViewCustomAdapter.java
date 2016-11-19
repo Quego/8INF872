@@ -102,6 +102,7 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
         TextView details = (TextView) view.findViewById(R.id.details);
         details.setText(currentParent.getDetails().trim());
 
+        //TODO
         ((Button) view.findViewById(R.id.participate_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

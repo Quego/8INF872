@@ -103,6 +103,7 @@ public class HomeActivity extends AppCompatActivity
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
             profilePictureView.setProfileId(user.getId());
+
         }
     }
 

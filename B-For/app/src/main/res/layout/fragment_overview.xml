@@ -1,126 +1,139 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="bfor8inf972.b_for.view.Fragments.OverviewFragment">
-
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:paddingTop="20sp">
+        android:orientation="vertical"
+        android:padding="10dip" >
 
-
-        <com.facebook.login.widget.ProfilePictureView
-            android:id="@+id/picture_profile"
+        <LinearLayout
+            android:id="@+id/profile_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="20sp">
+
+
+            <com.facebook.login.widget.ProfilePictureView
+                android:id="@+id/picture_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/com_facebook_profile_picture_blank_portrait" />
+
+
+            <LinearLayout
+                android:id="@+id/profil_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10sp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Prénom"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <TextView
+                    android:id="@+id/last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="0px"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Nom" />
+
+                <RatingBar
+                    android:id="@+id/current_rating"
+                    style="?android:attr/ratingBarStyleIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:isIndicator="true" />
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <LinearLayout
-            android:id="@+id/profil_layout"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10sp"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30sp">
 
             <TextView
-                android:id="@+id/first_name"
-                android:layout_width="wrap_content"
-                android:layout_height="0px"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Prénom"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-            <TextView
-                android:id="@+id/last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="0px"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="Nom" />
-
-            <RatingBar
-                android:id="@+id/recquired_rating"
-                style="?android:attr/ratingBarStyleIndicator"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:isIndicator="true" />
+                android:background="@color/com_facebook_button_background_color_focused_disabled"
+                android:gravity="center"
+                android:text="Évènements que j'organise"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <ExpandableListView
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/expandableListView_myEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30sp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/com_facebook_button_background_color_focused_disabled"
+                android:gravity="center"
+                android:text="Prochains évènements"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <ExpandableListView
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/expandableListView_nextEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="30sp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/com_facebook_button_background_color_focused_disabled"
+                android:gravity="center"
+                android:text="En attente de validation"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textStyle="bold" />
+
+            <ExpandableListView
+                android:nestedScrollingEnabled="true"
+                android:id="@+id/expandableListView_pendingEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
         </LinearLayout>
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Évènements que j'organise"
-            android:paddingTop="10sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
-
-        <ExpandableListView
-            android:id="@+id/expandableListView_myEvents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Prochains évènements"
-            android:paddingTop="10sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
-
-        <ExpandableListView
-            android:id="@+id/expandableListView_nextEvents"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="En attente de validation"
-            android:paddingTop="10sp"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textStyle="bold" />
-
-        <ExpandableListView
-            android:id="@+id/expandableListView_pending"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</ScrollView>

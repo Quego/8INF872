@@ -30,8 +30,8 @@ public class FindEventFragment extends Fragment {
     private String searchRequest;
 
     private OnFragmentInteractionListener mListener;
-    private ExpandableViewCustomAdapter listAdapter;
-    private ExpandableListView simpleExpandableListView;
+    private ExpandableViewCustomAdapter events_listAdapter;
+    private ExpandableListView events_expandableListView;
     private ArrayList<EventParent> eventList = new ArrayList<EventParent>();
 
     public FindEventFragment() {
@@ -67,6 +67,7 @@ public class FindEventFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                //TODO
                 Toast toast = Toast.makeText(getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
                 return false;
@@ -109,9 +110,9 @@ public class FindEventFragment extends Fragment {
         // add data for displaying in expandable list view
         loadData();
 
-        simpleExpandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.simpleExpandableListView);
-        listAdapter = new ExpandableViewCustomAdapter(getContext(), eventList);
-        simpleExpandableListView.setAdapter(listAdapter);
+        events_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_events);
+        events_listAdapter = new ExpandableViewCustomAdapter(getContext(), eventList);
+        events_expandableListView.setAdapter(events_listAdapter);
 
         return myFragmentView;
     }
