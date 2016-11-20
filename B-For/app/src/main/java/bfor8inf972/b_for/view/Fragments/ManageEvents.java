@@ -32,8 +32,9 @@ public class ManageEvents extends Fragment {
         switch (item.getItemId()) {
             case R.id.nav_addEvent:
 
+                CreateEventFragment addFragment = new CreateEventFragment();
                 getFragmentManager().beginTransaction().
-                        replace(R.id.FragmentContainer, new CreateEventFragment())
+                        replace(R.id.FragmentContainer, addFragment).addToBackStack(addFragment.toString())
                         .commit();
                 return true;
 

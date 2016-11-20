@@ -9,7 +9,7 @@ public class groupUser {
     private int user_id;
     private int driver_id;
 
-    groupUser(){
+    groupUser() {
 
     }
     // Serialization
@@ -21,33 +21,27 @@ public class groupUser {
     // Deserialization
     //  groupUser obj2 = gson.fromJson(json, groupUser.class);
 
-    public void setId(int id)
-    {
+    public void setId(int id) {
         this.Id = id;
     }
 
-    public int getId()
-    {
+    public int getId() {
         return Id;
     }
 
-    public void setUser_id(int user_id)
-    {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 
-    public int getUser_id()
-    {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setDriver_id(int driver_id)
-    {
+    public void setDriver_id(int driver_id) {
         this.driver_id = driver_id;
     }
 
-    public int getDriver_id()
-    {
+    public int getDriver_id() {
         return driver_id;
     }
 }

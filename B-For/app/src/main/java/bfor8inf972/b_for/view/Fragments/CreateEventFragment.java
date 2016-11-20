@@ -1,5 +1,6 @@
 package bfor8inf972.b_for.view.Fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,8 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.Utils.OnClickUtils;
 
 public class CreateEventFragment extends Fragment {
 
@@ -29,6 +32,7 @@ public class CreateEventFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,11 +40,27 @@ public class CreateEventFragment extends Fragment {
         }
     }
 
+    Button date;
+    Button beginHour;
+    Button endHour;
+    DatePickerDialog datePickerDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_event, container, false);
+
+
+        View myFragmentView = inflater.inflate(R.layout.fragment_create_event, container, false);
+        date = (Button) myFragmentView.findViewById(R.id.select_date);
+        date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(),date));
+
+        beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
+        beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),beginHour));
+
+        endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
+        endHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),endHour));
+
+        return myFragmentView;
     }
 
     public void onButtonPressed(Uri uri) {
