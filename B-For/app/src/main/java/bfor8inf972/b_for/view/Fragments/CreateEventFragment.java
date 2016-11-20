@@ -9,9 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.Utils.OnClickUtils;
+import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
 
 public class CreateEventFragment extends Fragment {
 
@@ -40,10 +43,6 @@ public class CreateEventFragment extends Fragment {
         }
     }
 
-    Button date;
-    Button beginHour;
-    Button endHour;
-    DatePickerDialog datePickerDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,14 +50,21 @@ public class CreateEventFragment extends Fragment {
 
 
         View myFragmentView = inflater.inflate(R.layout.fragment_create_event, container, false);
-        date = (Button) myFragmentView.findViewById(R.id.select_date);
+        Button date = (Button) myFragmentView.findViewById(R.id.select_date);
         date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(),date));
 
-        beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
+        Button  beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
         beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),beginHour));
 
-        endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
+        Button endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
         endHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),endHour));
+
+
+
+
+        ListView itemsToBring = (ListView) myFragmentView.findViewById(R.id.itemsToBring);
+
+
 
         return myFragmentView;
     }
