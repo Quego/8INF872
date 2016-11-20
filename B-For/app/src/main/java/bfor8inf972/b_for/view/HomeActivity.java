@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity
     private User user;
 
     private String currentFragmentName;
+    private int currentFragmentID;
 
     public HomeActivity(){
         manageEventsFragment = new ManageEvents();
@@ -54,7 +55,7 @@ public class HomeActivity extends AppCompatActivity
         settingFragment = new SettingsFragment();
         termOfUseFragment = new TermOfUseFragment();
         overviewFragment = new OverviewFragment();
-
+        currentFragmentID=-1;
         currentFragmentName=null;
     }
 
@@ -130,41 +131,43 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        if(id!=currentFragmentID) {
+            currentFragmentID = id;
 
-        if (id == R.id.nav_profil) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, profilFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.profil_title);
-        } else if (id == R.id.nav_termOfUse) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, termOfUseFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.termOfUse_title);
-        } else if (id == R.id.nav_manageEvent) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, manageEventsFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.manageEvent_title);
-        } else if (id == R.id.nav_settings) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, settingFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.settings_title);
-        } else if (id == R.id.nav_findEvent) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, findEventFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.findEvent_title);
-        } else if (id == R.id.nav_overview) {
-            getSupportFragmentManager().beginTransaction().
-                    replace(R.id.FragmentContainer, overviewFragment)
-                    .commit();
-            currentFragmentName = getResources().getString(R.string.overview_title);
+            if (id == R.id.nav_profil) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, profilFragment).addToBackStack(profilFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.profil_title);
+            } else if (id == R.id.nav_termOfUse) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, termOfUseFragment).addToBackStack(termOfUseFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.termOfUse_title);
+            } else if (id == R.id.nav_manageEvent) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, manageEventsFragment).addToBackStack(manageEventsFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.manageEvent_title);
+            } else if (id == R.id.nav_settings) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, settingFragment).addToBackStack(settingFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.settings_title);
+            } else if (id == R.id.nav_findEvent) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, findEventFragment).addToBackStack(findEventFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.findEvent_title);
+            } else if (id == R.id.nav_overview) {
+                getSupportFragmentManager().beginTransaction().
+                        replace(R.id.FragmentContainer, overviewFragment).addToBackStack(overviewFragment.toString())
+                        .commit();
+                currentFragmentName = getResources().getString(R.string.overview_title);
+            }
+
+            getSupportActionBar().setTitle(currentFragmentName);
         }
-
-        getSupportActionBar().setTitle(currentFragmentName);
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
