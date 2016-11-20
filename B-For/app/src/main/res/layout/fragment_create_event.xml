@@ -137,9 +137,7 @@
         <ListView
             android:id="@+id/itemsToBring"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/nav_header_home">
-
+            android:layout_height="wrap_content">
         </ListView>
 
         <Button

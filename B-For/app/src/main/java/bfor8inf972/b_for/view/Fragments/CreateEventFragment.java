@@ -1,6 +1,5 @@
 package bfor8inf972.b_for.view.Fragments;
 
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ExpandableListView;
+import android.widget.EditText;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.Utils.OnClickUtils;
-import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
+import bfor8inf972.b_for.view.customViews.RemovableRowAdapter;
 
 public class CreateEventFragment extends Fragment {
 
@@ -43,30 +45,82 @@ public class CreateEventFragment extends Fragment {
         }
     }
 
+    Button date;
+    Button beginHour;
+    Button endHour;
+    RemovableRowAdapter removableRowAdapter;
+    ListView itemsToBring;
+    ArrayList<String> listItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         View myFragmentView = inflater.inflate(R.layout.fragment_create_event, container, false);
-        Button date = (Button) myFragmentView.findViewById(R.id.select_date);
-        date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(),date));
 
-        Button  beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
-        beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),beginHour));
+        //Handle date button
+        date = (Button) myFragmentView.findViewById(R.id.select_date);
+        date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(), date));
 
-        Button endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
-        endHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(),endHour));
+        //Handle start Time button
+        beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
+        beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(), beginHour));
 
+        //Handle end Time button
+         endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
+        endHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(), endHour));
 
+        //Handle list items to bring
+        listItems = new ArrayList<String>();
+        removableRowAdapter = new RemovableRowAdapter(listItems, myFragmentView.getContext());
 
+        itemsToBring = (ListView) myFragmentView.findViewById(R.id.itemsToBring);
+        itemsToBring.setAdapter(removableRowAdapter);
+        setListViewHeight(itemsToBring);
 
-        ListView itemsToBring = (ListView) myFragmentView.findViewById(R.id.itemsToBring);
+        //Handle footer button
+        View footer = (View) myFragmentView.inflate(getContext(), R.layout.removable_list_footer, null);
+        itemsToBring.addFooterView(footer);
 
+        Button buttonAdd = (Button) footer.findViewById(R.id.footer_buttonAdd);
+        final EditText addEditText = (EditText) footer.findViewById(R.id.footer_editText);
 
-
+        buttonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //add string to listView
+                String addedItem = addEditText.getText().toString();
+                if(!addedItem.trim().equals("")) {
+                    listItems.add(addEditText.getText().toString());
+                    setListViewHeight(itemsToBring);
+                    addEditText.setText("");
+                    removableRowAdapter.notifyDataSetChanged();
+                }
+                addEditText.requestFocus();
+            }
+        });
         return myFragmentView;
+    }
+
+    /**
+     *
+     * @param listView the listView to resize
+     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
+     */
+    private void setListViewHeight(ListView listView) {
+        HeaderViewListAdapter listAdapter = (HeaderViewListAdapter) listView.getAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View groupItem = listAdapter.getView(i, null, listView);
+            groupItem.measure(0, 0);
+            totalHeight += groupItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 
     public void onButtonPressed(Uri uri) {

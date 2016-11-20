@@ -9,8 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +20,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bfor8inf972.b_for.R;
-import bfor8inf972.b_for.view.expandable.EventChild;
-import bfor8inf972.b_for.view.expandable.EventParent;
-import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
+import bfor8inf972.b_for.view.customViews.EventChild;
+import bfor8inf972.b_for.view.customViews.EventParent;
+import bfor8inf972.b_for.view.customViews.ExpandableViewCustomAdapter;
 
 
 public class OverviewFragment extends Fragment {
@@ -150,6 +148,12 @@ public class OverviewFragment extends Fragment {
         ((RatingBar) v.findViewById(R.id.current_rating)).setRating(2.8f);
     }
 
+
+    /**
+     *
+     * @param listView the listView to resize
+     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
+     */
     private void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableViewCustomAdapter listAdapter = (ExpandableViewCustomAdapter) listView.getExpandableListAdapter();
         int totalHeight = 0;

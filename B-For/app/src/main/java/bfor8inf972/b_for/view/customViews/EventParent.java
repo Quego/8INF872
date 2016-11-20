@@ -1,25 +1,23 @@
-package bfor8inf972.b_for.view.expandable;
+package bfor8inf972.b_for.view.customViews;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by Mathias on 15/11/2016.
+ * Describes R.layout.expandable_event_parent
  */
-
 public class EventParent {
 
     private String name;
     private String date;
     private String distance;
-
     private EventChild child;
 
 
     public EventParent() {
         this.name = "";
-        this.date="";
-        this.distance="";
+        this.date = "";
+        this.distance = "";
         this.child = null;
     }
 

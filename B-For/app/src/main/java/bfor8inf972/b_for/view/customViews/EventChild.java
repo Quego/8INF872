@@ -1,22 +1,22 @@
-package bfor8inf972.b_for.view.expandable;
+package bfor8inf972.b_for.view.customViews;
+
 
 /**
- * Created by Mathias on 15/11/2016.
+ * Describes R.layout.expandable_event_child
  */
-
 public class EventChild {
 
-    private String details ;
+    private String details;
     private float minRating;
 
     public EventChild() {
         this.details = "";
-        this.minRating=0;
+        this.minRating = 0;
     }
 
     public EventChild(String details, float minRating) {
-        this.details=details;
-        this.minRating=minRating;
+        this.details = details;
+        this.minRating = minRating;
     }
 
 

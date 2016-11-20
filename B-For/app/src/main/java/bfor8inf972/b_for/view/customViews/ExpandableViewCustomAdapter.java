@@ -1,4 +1,4 @@
-package bfor8inf972.b_for.view.expandable;
+package bfor8inf972.b_for.view.customViews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
 
-/**
- * Created by Mathias on 15/11/2016.
- */
 
+/**
+ * Adapter for R.layout.expandable_event_parent and R.layout.expandable_event_child
+ */
 public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     private Context context;

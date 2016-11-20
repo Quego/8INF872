@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bfor8inf972.b_for.R;
-import bfor8inf972.b_for.view.expandable.ExpandableViewCustomAdapter;
-import bfor8inf972.b_for.view.expandable.EventChild;
-import bfor8inf972.b_for.view.expandable.EventParent;
+import bfor8inf972.b_for.view.customViews.ExpandableViewCustomAdapter;
+import bfor8inf972.b_for.view.customViews.EventChild;
+import bfor8inf972.b_for.view.customViews.EventParent;
 
 
 public class FindEventFragment extends Fragment {
