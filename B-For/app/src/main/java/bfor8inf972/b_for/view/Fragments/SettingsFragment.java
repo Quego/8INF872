@@ -1,16 +1,28 @@
 package bfor8inf972.b_for.view.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.view.AuthenticationActivity;
 
 public class SettingsFragment extends Fragment {
+
+    Button logout;
+    Button delete;
 
     private OnFragmentInteractionListener mListener;
 
@@ -40,7 +52,28 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View myFragmentView = inflater.inflate(R.layout.fragment_settings, container, false);
+
+        logout = (Button) myFragmentView.findViewById(R.id.logout);
+        logout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AuthenticationActivity.class);
+                disconnectFromFacebook();
+                startActivity(intent);
+            }
+        });
+
+        delete = (Button) myFragmentView.findViewById(R.id.delete);
+        delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), AuthenticationActivity.class);
+                 deleteFromFacebook();
+                startActivity(intent);
+            }
+        });
+
+
+        return myFragmentView;
     }
 
     @Override
@@ -67,5 +100,31 @@ public class SettingsFragment extends Fragment {
      * activity.*/
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void disconnectFromFacebook() {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        LoginManager.getInstance().logOut();
+    }
+
+    public void deleteFromFacebook() {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
+            return; // already logged out
+        }
+
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me/permissions/", null, HttpMethod.DELETE, new GraphRequest
+                .Callback() {
+            @Override
+            public void onCompleted(GraphResponse graphResponse) {
+
+                LoginManager.getInstance().logOut();
+
+            }
+        }).executeAsync();
     }
 }

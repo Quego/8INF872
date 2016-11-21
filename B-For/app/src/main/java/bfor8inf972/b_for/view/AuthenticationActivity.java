@@ -15,12 +15,7 @@ import bfor8inf972.b_for.controller.ApplicationController;
 import bfor8inf972.b_for.representation.User;
 import bfor8inf972.b_for.service.AuthenticationFacebook;
 
-//TODO JAVADOC
 public class AuthenticationActivity extends AppCompatActivity {
-
-
-    private static final Logger LOGGER = Logger.getLogger(AuthenticationActivity.class.getName());
-
 
     private AuthenticationFacebook authenticationFacebook;
 
@@ -86,11 +81,10 @@ public class AuthenticationActivity extends AppCompatActivity {
         Intent intent = new Intent(this, HomeActivity.class);
 
         if (user != null) {
-            //TODO COMPLETE
             intent.putExtra("User", user);
             ApplicationController.getInstance().getUserController().addUser(user, this);
+            startActivity(intent);
         }
 
-        startActivity(intent);
     }
 }
