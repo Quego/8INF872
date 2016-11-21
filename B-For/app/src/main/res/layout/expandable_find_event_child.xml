@@ -9,8 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,9 +59,9 @@
         android:layout_gravity="center"
         android:hint="Details "
         android:paddingBottom="5sp"
-        android:paddingTop="5sp"
         android:paddingLeft="20sp"
         android:paddingRight="20sp"
+        android:paddingTop="5sp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -69,7 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/participate_button" />
+        android:text="@string/participate_button"
+        android:backgroundTint="@android:color/holo_green_light"/>
 
 
 </LinearLayout>

@@ -1,8 +1,6 @@
 package bfor8inf972.b_for.view;
 
 
-
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -48,15 +46,15 @@ public class HomeActivity extends AppCompatActivity
     private String currentFragmentName;
     private int currentFragmentID;
 
-    public HomeActivity(){
+    public HomeActivity() {
         manageEventsFragment = new ManageEvents();
         findEventFragment = new FindEventFragment();
         profilFragment = new ProfilFragment();
         settingFragment = new SettingsFragment();
         termOfUseFragment = new TermOfUseFragment();
         overviewFragment = new OverviewFragment();
-        currentFragmentID=-1;
-        currentFragmentName=null;
+        currentFragmentID = -1;
+        currentFragmentName = null;
     }
 
 
@@ -96,11 +94,11 @@ public class HomeActivity extends AppCompatActivity
         getSupportActionBar().setTitle(currentFragmentName);
     }
 
-    private void InitialiseUserInfo(View v){
+    private void InitialiseUserInfo(View v) {
         TextView firstName = (TextView) v.findViewById(R.id.first_name);
         TextView lastName = (TextView) v.findViewById(R.id.last_name);
-        ProfilePictureView profilePictureView =(ProfilePictureView) v.findViewById(R.id.picture_profile);
-        if(user!=null) {
+        ProfilePictureView profilePictureView = (ProfilePictureView) v.findViewById(R.id.picture_profile);
+        if (user != null) {
             firstName.setText(user.getFirstName());
             lastName.setText(user.getLastName());
             profilePictureView.setProfileId(user.getId());
@@ -131,7 +129,7 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if(id!=currentFragmentID) {
+        if (id != currentFragmentID) {
             currentFragmentID = id;
 
             if (id == R.id.nav_profil) {

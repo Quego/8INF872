@@ -24,6 +24,11 @@
     <string name="participate_button">Demande de participation</string>
     <string name="termOfUse_text">En utilisant cette application, vous acceptez le fait que les développeurs ne sont en rien responsable de ce qu\'il se passe durant vos évènements</string>
     <string name="NoEventToManage">Vous n\'avez encore aucun évènement à gérer</string>
+    <string name="cancel_button">Je ne viens plus</string>
+    <string name="details">Details</string>
+    <string name="cancelPending_button">Annuler ma demande</string>
+    <string name="manage_button">Gérer</string>
+    <string name="cancelEvent_button">Supprimer</string>
 
 
 </resources>

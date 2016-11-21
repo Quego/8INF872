@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -20,9 +21,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bfor8inf972.b_for.R;
-import bfor8inf972.b_for.view.customViews.EventChild;
-import bfor8inf972.b_for.view.customViews.EventParent;
-import bfor8inf972.b_for.view.customViews.ExpandableViewCustomAdapter;
+import bfor8inf972.b_for.representation.Localization;
+import bfor8inf972.b_for.representation.Party;
+import bfor8inf972.b_for.view.customViews.ExpandableEventAdapter;
+import bfor8inf972.b_for.view.customViews.ExpandableMyEventAdapter;
+import bfor8inf972.b_for.view.customViews.ExpandableNextEventAdapter;
+import bfor8inf972.b_for.view.customViews.ExpandablePendingEventAdapter;
 
 
 public class OverviewFragment extends Fragment {
@@ -30,17 +34,17 @@ public class OverviewFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
 
-    private ExpandableViewCustomAdapter myEvents_listAdapter;
+    private ExpandableMyEventAdapter myEvents_listAdapter;
     private ExpandableListView myEvents_expandableListView;
-    private ArrayList<EventParent> myEvents_list = new ArrayList<EventParent>();
+    private ArrayList<Party> myEvents_list = new ArrayList<Party>();
 
-    private ExpandableViewCustomAdapter nextEvents_listAdapter;
+    private ExpandableNextEventAdapter nextEvents_listAdapter;
     private ExpandableListView nextEvents_expandableListView;
-    private ArrayList<EventParent> nextEvents_list = new ArrayList<EventParent>();
+    private ArrayList<Party> nextEvents_list = new ArrayList<Party>();
 
-    private ExpandableViewCustomAdapter pendingEvents_listAdapter;
+    private ExpandablePendingEventAdapter pendingEvents_listAdapter;
     private ExpandableListView pendingEvents_expandableListView;
-    private ArrayList<EventParent> pendingEvents_list = new ArrayList<EventParent>();
+    private ArrayList<Party> pendingEvents_list = new ArrayList<Party>();
 
 
     public OverviewFragment() {
@@ -75,17 +79,17 @@ public class OverviewFragment extends Fragment {
         loadMyEvents();
 
         myEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_myEvents);
-        myEvents_listAdapter = new ExpandableViewCustomAdapter(getContext(), myEvents_list);
+        myEvents_listAdapter = new ExpandableMyEventAdapter(getContext(), myEvents_list);
         myEvents_expandableListView.setAdapter(myEvents_listAdapter);
         loadNextEvents();
 
         nextEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_nextEvents);
-        nextEvents_listAdapter = new ExpandableViewCustomAdapter(getContext(), nextEvents_list);
+        nextEvents_listAdapter = new ExpandableNextEventAdapter(getContext(), nextEvents_list);
         nextEvents_expandableListView.setAdapter(nextEvents_listAdapter);
 
         loadPendingEvents();
         pendingEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_pendingEvents);
-        pendingEvents_listAdapter = new ExpandableViewCustomAdapter(getContext(), pendingEvents_list);
+        pendingEvents_listAdapter = new ExpandablePendingEventAdapter(getContext(), pendingEvents_list);
         pendingEvents_expandableListView.setAdapter(pendingEvents_listAdapter);
 
 
@@ -93,7 +97,7 @@ public class OverviewFragment extends Fragment {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                setListViewHeight(parent, groupPosition);
+                myEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
         });
@@ -102,7 +106,7 @@ public class OverviewFragment extends Fragment {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                setListViewHeight(parent, groupPosition);
+                nextEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
         });
@@ -111,14 +115,14 @@ public class OverviewFragment extends Fragment {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                setListViewHeight(parent, groupPosition);
+                pendingEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
         });
 
-        setListViewHeight(myEvents_expandableListView, -1);
-        setListViewHeight(nextEvents_expandableListView, -1);
-        setListViewHeight(pendingEvents_expandableListView, -1);
+        myEvents_listAdapter.setListViewHeight(myEvents_expandableListView, -1);
+        nextEvents_listAdapter.setListViewHeight(nextEvents_expandableListView, -1);
+        pendingEvents_listAdapter.setListViewHeight(pendingEvents_expandableListView, -1);
 
         InitialiseProfilInfo(myFragmentView);
         ((LinearLayout) myFragmentView.findViewById(R.id.profile_layout)).setOnClickListener(new View.OnClickListener() {
@@ -149,61 +153,39 @@ public class OverviewFragment extends Fragment {
     }
 
 
-    /**
-     *
-     * @param listView the listView to resize
-     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
-     */
-    private void setListViewHeight(ExpandableListView listView, int group) {
-        ExpandableViewCustomAdapter listAdapter = (ExpandableViewCustomAdapter) listView.getExpandableListAdapter();
-        int totalHeight = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
 
-        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-            View groupItem = listAdapter.getGroupView(i, false, null, listView);
-            groupItem.measure(0, 0);
-
-            totalHeight += groupItem.getMeasuredHeight();
-
-            if (group != -1 && ((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
-                View listItem = listAdapter.getChildView(i, 0, false, null, listView);
-                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
-                totalHeight += listItem.getMeasuredHeight();
-            }
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
-        listView.setLayoutParams(params);
-
-    }
 
 
     private void loadMyEvents() {
         myEvents_list.clear();
-        addEvent(myEvents_list, "Grosse fête", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
-        addEvent(myEvents_list, "Soirée Lan ", new Date(), "12 km", "Venez geeker avec moi, j'ai pas d'amis");
-        addEvent(myEvents_list, "Soirée GOT ", new Date(), "12 km", "Pop corn, série, chill");
+
+        myEvents_list.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 5) );
+        myEvents_list.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 100, 2) );
+        myEvents_list.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 4) );
+
+       //addEvent(myEvents_list, "Grosse fête", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
+       //addEvent(myEvents_list, "Soirée Lan ", new Date(), "12 km", "Venez geeker avec moi, j'ai pas d'amis");
+       //addEvent(myEvents_list, "Soirée GOT ", new Date(), "12 km", "Pop corn, série, chill");
 
     }
 
     private void loadNextEvents() {
         nextEvents_list.clear();
-        addEvent(nextEvents_list, "Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
-        addEvent(nextEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
+        nextEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
+        nextEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
+
+
+       //addEvent(nextEvents_list, "Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
+       //addEvent(nextEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
     }
 
     private void loadPendingEvents() {
-        addEvent(pendingEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
-        addEvent(myEvents_list, "Projet X ", new Date(), "47 km", "Un appartement, 50 m², une table de beer-pong ...");
+        pendingEvents_list.clear();
+        pendingEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
+        pendingEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
     }
 
 
-    private void addEvent(ArrayList<EventParent> useList, String name, Date date, String distance, String details) {
-        EventChild child = new EventChild(details, 2.5f);
-        EventParent parent = new EventParent(name, distance, date, child);
-        useList.add(parent);
-    }
 
 
     @Override

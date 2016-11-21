@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
+import android.widget.ExpandableListView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,28 +14,29 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
+import bfor8inf972.b_for.representation.Party;
 
 
 /**
- * Adapter for R.layout.expandable_event_parent and R.layout.expandable_event_child
+ * Adapter for R.layout.expandable_event_parent and R.layout.expandable_find_event_child
  */
-public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
+public class ExpandableEventAdapter extends BaseExpandableListAdapter {
 
     private Context context;
-    private ArrayList<EventParent> parents;
+    private ArrayList<Party> parties;
 
-    public ExpandableViewCustomAdapter(Context context, ArrayList<EventParent> parents) {
+    public ExpandableEventAdapter(Context context, ArrayList<Party> parties) {
         this.context = context;
-        this.parents = parents;
+        this.parties = parties;
     }
 
     public void remove(int index) {
-        parents.remove(index);
+        parties.remove(index);
     }
 
     @Override
     public int getGroupCount() {
-        return parents.size();
+        return parties.size();
     }
 
     @Override
@@ -44,13 +46,13 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getGroup(int groupPosition) {
-        return parents.get(groupPosition);
+        return parties.get(groupPosition);
     }
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        EventChild productList = parents.get(groupPosition).getChild();
-        return productList;
+        Party p = parties.get(groupPosition);
+        return p;
     }
 
     @Override
@@ -70,20 +72,20 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View view, ViewGroup parent) {
-        EventParent currentChild = (EventParent) getGroup(groupPosition);
+        Party party = (Party) getGroup(groupPosition);
         if (view == null) {
             LayoutInflater inf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inf.inflate(R.layout.expandable_event_parent, null);
         }
 
         TextView title = (TextView) view.findViewById(R.id.event_title);
-        title.setText(currentChild.getName().trim());
+        title.setText(party.getTitle().trim());
 
         TextView date = (TextView) view.findViewById(R.id.event_date);
-        date.setText(currentChild.getDate().trim());
+        date.setText(party.getCreationTime().trim());
 
         TextView distance = (TextView) view.findViewById(R.id.event_distance);
-        distance.setText(currentChild.getDistance().trim());
+        distance.setText(party.getLocalization().getAddress());
 
         return view;
     }
@@ -91,16 +93,16 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View view, ViewGroup parent) {
 
-        EventChild currentParent = (EventChild) getChild(groupPosition, childPosition);
+        Party party = (Party) getChild(groupPosition, childPosition);
         if (view == null) {
             LayoutInflater layInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = layInflater.inflate(R.layout.expandable_event_child, null);
+            view = layInflater.inflate(R.layout.expandable_find_event_child, null);
         }
 
-        ((RatingBar) view.findViewById(R.id.recquired_rating)).setRating(currentParent.getMinRating());
+        ((RatingBar) view.findViewById(R.id.recquired_rating)).setRating(party.getMinimumStars());
 
         TextView details = (TextView) view.findViewById(R.id.details);
-        details.setText(currentParent.getDetails().trim());
+        details.setText("TODO : ajouter des details pour un évènement");
 
         //TODO
         ((Button) view.findViewById(R.id.participate_button)).setOnClickListener(new View.OnClickListener() {
@@ -114,8 +116,36 @@ public class ExpandableViewCustomAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
+
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+    /**
+     *
+     * @param listView the listView to resize
+     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
+     */
+    public void setListViewHeight(ExpandableListView listView, int group) {
+        ExpandableEventAdapter listAdapter = (ExpandableEventAdapter) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
+
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(0, 0);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (group != -1 && ((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                View listItem = listAdapter.getChildView(i, 0, false, null, listView);
+                listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+                totalHeight += listItem.getMeasuredHeight();
+            }
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        listView.setLayoutParams(params);
     }
 }

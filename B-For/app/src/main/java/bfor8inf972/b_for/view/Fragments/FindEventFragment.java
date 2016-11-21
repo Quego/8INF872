@@ -18,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import bfor8inf972.b_for.R;
-import bfor8inf972.b_for.view.customViews.ExpandableViewCustomAdapter;
-import bfor8inf972.b_for.view.customViews.EventChild;
-import bfor8inf972.b_for.view.customViews.EventParent;
+import bfor8inf972.b_for.representation.Localization;
+import bfor8inf972.b_for.representation.Party;
+import bfor8inf972.b_for.view.customViews.ExpandableEventAdapter;
 
 
 public class FindEventFragment extends Fragment {
@@ -30,9 +30,9 @@ public class FindEventFragment extends Fragment {
     private String searchRequest;
 
     private OnFragmentInteractionListener mListener;
-    private ExpandableViewCustomAdapter events_listAdapter;
+    private ExpandableEventAdapter events_listAdapter;
     private ExpandableListView events_expandableListView;
-    private ArrayList<EventParent> eventList = new ArrayList<EventParent>();
+    private ArrayList<Party> eventList = new ArrayList<Party>();
 
     public FindEventFragment() {
         searchView = null;
@@ -111,7 +111,7 @@ public class FindEventFragment extends Fragment {
         loadData();
 
         events_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_events);
-        events_listAdapter = new ExpandableViewCustomAdapter(getContext(), eventList);
+        events_listAdapter = new ExpandableEventAdapter(getContext(), eventList);
         events_expandableListView.setAdapter(events_listAdapter);
 
         return myFragmentView;
@@ -120,18 +120,11 @@ public class FindEventFragment extends Fragment {
 
     private void loadData() {
         eventList.clear();
-        addEvent("Grosse fête ", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
-        addEvent("Soirée LAN", new Date(), "13 km", "Prenez vos manettes de Xbox et venez découvrir des jeux en local !");
-        addEvent("Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
-        addEvent("C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
-    }
-
-
-    private void addEvent(String name, Date date, String distance, String details) {
-
-        EventChild child = new EventChild(details, 2.5f);
-        EventParent parent = new EventParent(name, distance, date, child);
-        eventList.add(parent);
+        eventList.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 5) );
+        eventList.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 100, 2) );
+        eventList.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 4) );
+        eventList.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
+        eventList.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
     }
 
 

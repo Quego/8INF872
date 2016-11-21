@@ -76,11 +76,12 @@ public class CreateEventFragment extends Fragment {
 
         itemsToBring = (ListView) myFragmentView.findViewById(R.id.itemsToBring);
         itemsToBring.setAdapter(removableRowAdapter);
-        setListViewHeight(itemsToBring);
+
 
         //Handle footer button
         View footer = (View) myFragmentView.inflate(getContext(), R.layout.removable_list_footer, null);
         itemsToBring.addFooterView(footer);
+        removableRowAdapter.setListViewHeight(itemsToBring);
 
         Button buttonAdd = (Button) footer.findViewById(R.id.footer_buttonAdd);
         final EditText addEditText = (EditText) footer.findViewById(R.id.footer_editText);
@@ -92,7 +93,7 @@ public class CreateEventFragment extends Fragment {
                 String addedItem = addEditText.getText().toString();
                 if(!addedItem.trim().equals("")) {
                     listItems.add(addEditText.getText().toString());
-                    setListViewHeight(itemsToBring);
+                    removableRowAdapter.setListViewHeight(itemsToBring);
                     addEditText.setText("");
                     removableRowAdapter.notifyDataSetChanged();
                 }
@@ -102,32 +103,7 @@ public class CreateEventFragment extends Fragment {
         return myFragmentView;
     }
 
-    /**
-     *
-     * @param listView the listView to resize
-     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
-     */
-    private void setListViewHeight(ListView listView) {
-        HeaderViewListAdapter listAdapter = (HeaderViewListAdapter) listView.getAdapter();
-        int totalHeight = 0;
-        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
 
-        for (int i = 0; i < listAdapter.getCount(); i++) {
-            View groupItem = listAdapter.getView(i, null, listView);
-            groupItem.measure(0, 0);
-            totalHeight += groupItem.getMeasuredHeight();
-        }
-
-        ViewGroup.LayoutParams params = listView.getLayoutParams();
-        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        listView.setLayoutParams(params);
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {

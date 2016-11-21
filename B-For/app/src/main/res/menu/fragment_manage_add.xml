@@ -6,6 +6,6 @@
         android:id="@+id/nav_addEvent"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/addEvent_title"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

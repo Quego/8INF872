@@ -1,12 +1,15 @@
 package bfor8inf972.b_for.view.customViews;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.HeaderViewListAdapter;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -65,5 +68,27 @@ public class RemovableRowAdapter extends BaseAdapter implements ListAdapter {
         });
 
         return view;
+    }
+
+
+    /**
+     *
+     * @param listView the listView to resize
+     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
+     */
+    public void setListViewHeight(ListView listView) {
+        ListAdapter listAdapter = (ListAdapter) listView.getAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
+
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            View groupItem = listAdapter.getView(i, null, listView);
+            groupItem.measure(0, 0);
+            totalHeight += groupItem.getMeasuredHeight();
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
     }
 }

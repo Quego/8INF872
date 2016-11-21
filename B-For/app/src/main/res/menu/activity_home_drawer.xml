@@ -13,7 +13,7 @@
         <item
             android:id="@+id/nav_manageEvent"
             android:icon="@android:drawable/ic_menu_add"
-            android:title="@string/manageEvent_title"/>
+            android:title="@string/manageEvent_title" />
         <item
             android:id="@+id/nav_profil"
             android:icon="@android:drawable/ic_menu_edit"
@@ -21,10 +21,10 @@
         <item
             android:id="@+id/nav_settings"
             android:icon="@android:drawable/ic_menu_manage"
-            android:title="@string/settings_title"/>
+            android:title="@string/settings_title" />
         <item
             android:id="@+id/nav_termOfUse"
             android:icon="@android:drawable/ic_menu_info_details"
-            android:title="@string/termOfUse_title"/>
+            android:title="@string/termOfUse_title" />
     </group>
 </menu>
