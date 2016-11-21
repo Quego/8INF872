@@ -210,4 +210,17 @@ public class Party implements Serializable {
     public void setMinimumStars(int minimumStars) {
         this.minimumStars = minimumStars;
     }
+
+    public boolean validateImportantFields() {
+
+        //TODO check fields when they're added
+        if (getStartingHour() == null || getStartingHour().equals("")
+                || getFinishingHour() == null || getFinishingHour().equals("")
+                || getTitle() == null || getTitle().equals("")
+                || getMaxPeople() == 0
+                || getLocalization() == null)
+            return false;
+
+        return true;
+    }
 }

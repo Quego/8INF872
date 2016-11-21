@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.HeaderViewListAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.Utils.OnClickUtils;
@@ -24,10 +27,17 @@ public class CreateEventFragment extends Fragment {
     Button date;
     Button beginHour;
     Button endHour;
+    EditText maxPeople;
+    EditText maxSleepinPeople;
+    RatingBar recquiredStars;
+    AutoCompleteTextView detailsField;
+
     RemovableRowAdapter removableRowAdapter;
     ListView itemsToBring;
     ArrayList<String> listItems;
+
     private OnFragmentInteractionListener mListener;
+
     public CreateEventFragment() {
         // Required empty public constructor
     }
@@ -56,6 +66,13 @@ public class CreateEventFragment extends Fragment {
 
         View myFragmentView = inflater.inflate(R.layout.fragment_create_event, container, false);
 
+        //Get views to get values later
+        maxPeople = (EditText) myFragmentView.findViewById(R.id.max_guest);
+        maxSleepinPeople = (EditText) myFragmentView.findViewById(R.id.max_sleeping_guest);
+        recquiredStars = (RatingBar) myFragmentView.findViewById(R.id.ratingBar);
+        detailsField = (AutoCompleteTextView) myFragmentView.findViewById(R.id.details);
+
+
         //Handle date button
         date = (Button) myFragmentView.findViewById(R.id.select_date);
         date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(), date));
@@ -65,7 +82,7 @@ public class CreateEventFragment extends Fragment {
         beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(), beginHour));
 
         //Handle end Time button
-         endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
+        endHour = (Button) myFragmentView.findViewById(R.id.select_time_end);
         endHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(), endHour));
 
         //Handle list items to bring
@@ -74,7 +91,6 @@ public class CreateEventFragment extends Fragment {
 
         itemsToBring = (ListView) myFragmentView.findViewById(R.id.itemsToBring);
         itemsToBring.setAdapter(removableRowAdapter);
-
 
         //Handle footer button
         View footer = (View) myFragmentView.inflate(getContext(), R.layout.removable_list_footer, null);
@@ -89,7 +105,7 @@ public class CreateEventFragment extends Fragment {
             public void onClick(View v) {
                 //add string to listView
                 String addedItem = addEditText.getText().toString();
-                if(!addedItem.trim().equals("")) {
+                if (!addedItem.trim().equals("")) {
                     listItems.add(addEditText.getText().toString());
                     removableRowAdapter.setListViewHeight(itemsToBring);
                     addEditText.setText("");
@@ -105,14 +121,37 @@ public class CreateEventFragment extends Fragment {
         createEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 //TODO Set party and send it to API
                 Party p = new Party();
+                //TODO add date
+                //p.setDate(date.getText());
+                p.setMaxPeople(Integer.parseInt(maxPeople.getText().toString()));
+                //TODO add maxSleeping
+                //p.setMaxPeopleSleeping(Integer.parseInt(maxSleepinPeople.getText().toString()));
+                p.setStartingHour(beginHour.getText().toString());
+                p.setFinishingHour(endHour.getText().toString());
+                p.setCreationTime(new Date().toString());
+                //TODO create listMissing
+                //p.setListMissing();
+                //Todo setMinimumStars is Float
+                //p.setMinimumStars(recquiredStars.getRating());
+                //TODO add details
+                //p.setDetails(detailsField.getText().toString();
+                //TODO add connected user
+                //p.setUser();
+
+                if (p.validateImportantFields()) {
+                    //TODO speak with API
+                } else {
+                    Toast toast = Toast.makeText(v.getContext(), "Veuillez compléter tous les champs ", Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
 
         return myFragmentView;
     }
-
 
 
     @Override
