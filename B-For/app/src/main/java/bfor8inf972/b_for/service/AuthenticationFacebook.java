@@ -44,10 +44,11 @@ public class AuthenticationFacebook {
 
         if(profile != null) {
 
-            user = new User(profile.getFirstName(),profile.getLastName(), profile.getId());
+            user = new User();
+            user.setFirstName(profile.getFirstName());
+            user.setLastName(profile.getLastName());
+            user.setId(profile.getId());
 
-
-            id = profile.getId();
         }
 
         return user;
