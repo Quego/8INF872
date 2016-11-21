@@ -5,16 +5,16 @@ import com.google.gson.JsonElement;
 
 import java.io.Serializable;
 
-public class Localization implements Serializable{
+public class Localization implements Serializable {
 
     private int id;
 
-    private String longitude="";
-    private String latitude="";
+    private String longitude = "";
+    private String latitude = "";
 
-    private String address="";
+    private String address = "";
 
-    public Localization(){
+    public Localization() {
         this.id = -1;
 
         this.longitude = "UNKNOWN";
@@ -36,9 +36,8 @@ public class Localization implements Serializable{
         Localization localization = new Localization();
 
         try {
-            localization =  gson.fromJson(json,Localization.class);
-        }
-        catch (Exception e){
+            localization = gson.fromJson(json, Localization.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.id = localization.getId();
@@ -47,44 +46,36 @@ public class Localization implements Serializable{
         this.address = localization.getAddress();
     }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setLongitude(String longitude)
-    {
-        this.longitude = longitude;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getLongitude()
-    {
+    public String getLongitude() {
         return longitude;
     }
 
-    public void setLatitude(String latitude)
-    {
-        this.latitude = latitude;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
-    public String getLatitude()
-    {
+    public String getLatitude() {
         return latitude;
     }
 
-    public void setAddress(String address)
-    {
-        this.address = address;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

@@ -5,9 +5,12 @@ import java.util.logging.Logger;
 
 public class ApplicationController {
 
-    private static ApplicationController instance = null;
-
     private static final Logger LOGGER = Logger.getLogger(ApplicationController.class.getName());
+    private static ApplicationController instance = null;
+    private UserController userController;
+
+    private ApplicationController() {
+    }
 
     public static ApplicationController getInstance() {
         if (instance == null) {
@@ -16,11 +19,6 @@ public class ApplicationController {
         }
 
         return instance;
-    }
-
-    private UserController userController;
-
-    private ApplicationController() {
     }
 
     private void initialize() {

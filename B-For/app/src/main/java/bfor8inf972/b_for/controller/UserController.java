@@ -18,13 +18,11 @@ public class UserController {
 
     private User user;
 
-    UserController()
-    {
+    UserController() {
         this.user = new User();
     }
 
-    public void addUser(User user, Context context/*Other stuff*/)
-    {
+    public void addUser(User user, Context context/*Other stuff*/) {
         //TODO SQL STUFF
     }
 
@@ -37,8 +35,7 @@ public class UserController {
     }
 
 
-    public User getUser()
-    {
+    public User getUser() {
         return this.user;
     }
 

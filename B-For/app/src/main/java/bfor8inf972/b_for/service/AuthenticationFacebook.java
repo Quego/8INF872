@@ -21,38 +21,6 @@ public class AuthenticationFacebook {
 
     private ProfileTracker profileTracker;
     private Profile profile;
-
-    private String id;
-
-    public AuthenticationFacebook(AuthenticationActivity activity) {
-
-        FacebookSdk.sdkInitialize(activity.getApplicationContext());
-
-        this.activity = activity;
-
-        initTracker();
-    }
-
-    public User authenticate() {
-
-        //TODO try excpetion
-        User user = null;
-
-        if(this.profile == null) {
-            profile = Profile.getCurrentProfile();
-        }
-
-        if(profile != null) {
-            user = new User();
-            user.setFirstName(profile.getFirstName());
-            user.setLastName(profile.getLastName());
-            user.setId(profile.getId());
-        }
-
-        return user;
-    }
-
-    //TODO FINISH
     /**
      * Facebook callback which manage the authentication
      */
@@ -76,6 +44,37 @@ public class AuthenticationFacebook {
             LOGGER.warning("Error while connected " + e.getMessage());
         }
     };
+    private String id;
+
+    public AuthenticationFacebook(AuthenticationActivity activity) {
+
+        FacebookSdk.sdkInitialize(activity.getApplicationContext());
+
+        this.activity = activity;
+
+        initTracker();
+    }
+
+    //TODO FINISH
+
+    public User authenticate() {
+
+        //TODO try excpetion
+        User user = null;
+
+        if (this.profile == null) {
+            profile = Profile.getCurrentProfile();
+        }
+
+        if (profile != null) {
+            user = new User();
+            user.setFirstName(profile.getFirstName());
+            user.setLastName(profile.getLastName());
+            user.setId(profile.getId());
+        }
+
+        return user;
+    }
 
     /**
      * Init the trackers which purpose is to notify the change

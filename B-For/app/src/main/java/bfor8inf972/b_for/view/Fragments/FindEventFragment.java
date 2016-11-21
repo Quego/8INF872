@@ -38,13 +38,19 @@ public class FindEventFragment extends Fragment {
         searchView = null;
     }
 
+    public static FindEventFragment newInstance(String param1, String param2) {
+        FindEventFragment fragment = new FindEventFragment();
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         savedInstanceState.putString("searchRequest", searchRequest);
         super.onSaveInstanceState(savedInstanceState);
     }
-
 
     @Override
     public void onViewStateRestored(Bundle savedInstanceState) {
@@ -53,7 +59,6 @@ public class FindEventFragment extends Fragment {
         }
         super.onViewStateRestored(savedInstanceState);
     }
-
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -83,14 +88,6 @@ public class FindEventFragment extends Fragment {
         if (searchView != null) {
             searchView.setQuery(searchRequest, false);
         }
-    }
-
-    public static FindEventFragment newInstance(String param1, String param2) {
-        FindEventFragment fragment = new FindEventFragment();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

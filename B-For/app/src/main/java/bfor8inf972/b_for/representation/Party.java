@@ -1,19 +1,12 @@
 package bfor8inf972.b_for.representation;
 
-import android.app.job.JobScheduler;
-
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.SortedSet;
 
-import bfor8inf972.b_for.representation.ListMissing;
-import bfor8inf972.b_for.representation.Localization;
-import bfor8inf972.b_for.representation.User;
-
-public class Party implements Serializable{
+public class Party implements Serializable {
     private int id;
     private String title;
     private String creationTime;
@@ -27,7 +20,7 @@ public class Party implements Serializable{
 
     private ListMissing listMissing;
 
-    private HashSet<User>  sleepingGuests;
+    private HashSet<User> sleepingGuests;
 
     private boolean sleepAvailable;
 
@@ -42,7 +35,8 @@ public class Party implements Serializable{
     public Party() {
         this.id = -1;
         this.title = "UNKNOWN";
-        this.creationTime = "UNKNOWN";;
+        this.creationTime = "UNKNOWN";
+        ;
         this.updateTime = "UNKNOWN";
         this.user = new User();
         this.guests = new HashSet<>();
@@ -73,14 +67,13 @@ public class Party implements Serializable{
         this.minimumStars = minimumStars;
     }
 
-    public Party(JsonElement json){
+    public Party(JsonElement json) {
         Gson gson = new Gson();
 
         Party party = new Party();
         try {
-            party = gson.fromJson(json,Party.class);
-        }
-        catch (Exception e){
+            party = gson.fromJson(json, Party.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -100,121 +93,121 @@ public class Party implements Serializable{
         this.minimumStars = party.getId();
     }
 
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         return json;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setCreationTime(String creationTime) {
-        this.creationTime = creationTime;
-    }
-
-    public void setUpdateTime(String updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setGuests(HashSet<User> guests) {
-        this.guests = guests;
-    }
-
-    public void setLocalization(Localization localization) {
-        this.localization = localization;
-    }
-
-    public void setListMissing(ListMissing listMissing) {
-        this.listMissing = listMissing;
-    }
-
-    public void setSleepingGuests(HashSet<User> sleepingGuests) {
-        this.sleepingGuests = sleepingGuests;
-    }
-
-    public void setSleepAvailable(boolean sleepAvailable) {
-        this.sleepAvailable = sleepAvailable;
-    }
-
-    public void setStartingHour(String startingHour) {
-        this.startingHour = startingHour;
-    }
-
-    public void setFinishingHour(String finishingHour) {
-        this.finishingHour = finishingHour;
-    }
-
-    public void setMaxPeople(int maxPeople) {
-        this.maxPeople = maxPeople;
-    }
-
-    public void setMinimumStars(int minimumStars) {
-        this.minimumStars = minimumStars;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTitle() {
         return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCreationTime() {
         return creationTime;
     }
 
+    public void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public String getUpdateTime() {
         return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
     public User getUser() {
         return user;
     }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public HashSet<User> getGuests() {
         return guests;
+    }
+
+    public void setGuests(HashSet<User> guests) {
+        this.guests = guests;
     }
 
     public Localization getLocalization() {
         return localization;
     }
 
+    public void setLocalization(Localization localization) {
+        this.localization = localization;
+    }
+
     public ListMissing getListMissing() {
         return listMissing;
+    }
+
+    public void setListMissing(ListMissing listMissing) {
+        this.listMissing = listMissing;
     }
 
     public HashSet<User> getSleepingGuests() {
         return sleepingGuests;
     }
 
+    public void setSleepingGuests(HashSet<User> sleepingGuests) {
+        this.sleepingGuests = sleepingGuests;
+    }
+
     public boolean isSleepAvailable() {
         return sleepAvailable;
+    }
+
+    public void setSleepAvailable(boolean sleepAvailable) {
+        this.sleepAvailable = sleepAvailable;
     }
 
     public String getStartingHour() {
         return startingHour;
     }
 
+    public void setStartingHour(String startingHour) {
+        this.startingHour = startingHour;
+    }
+
     public String getFinishingHour() {
         return finishingHour;
+    }
+
+    public void setFinishingHour(String finishingHour) {
+        this.finishingHour = finishingHour;
     }
 
     public int getMaxPeople() {
         return maxPeople;
     }
 
+    public void setMaxPeople(int maxPeople) {
+        this.maxPeople = maxPeople;
+    }
+
     public int getMinimumStars() {
         return minimumStars;
+    }
+
+    public void setMinimumStars(int minimumStars) {
+        this.minimumStars = minimumStars;
     }
 }

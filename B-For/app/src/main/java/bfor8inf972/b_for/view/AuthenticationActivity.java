@@ -24,7 +24,7 @@ public class AuthenticationActivity extends AppCompatActivity {
 
     private AuthenticationFacebook authenticationFacebook;
 
-    private CallbackManager         callbackManager; /* Manage the callback for facebook authentication. */
+    private CallbackManager callbackManager; /* Manage the callback for facebook authentication. */
 
     /**
      * {@inheritDoc}
@@ -46,7 +46,9 @@ public class AuthenticationActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, this.authenticationFacebook.facebookCallbackManager);
     }
 
-    /**{@inheritDoc}*/
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
@@ -56,14 +58,18 @@ public class AuthenticationActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    /**{@inheritDoc}*/
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void onPause() {
 
         super.onPause();
     }
 
-    /**{@inheritDoc}*/
+    /**
+     * {@inheritDoc}
+     */
     protected void onStop() {
         super.onStop();
 
@@ -77,14 +83,14 @@ public class AuthenticationActivity extends AppCompatActivity {
      */
     public void launchMainActivity(User user) {
 
-       Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
 
-        if(user != null) {
+        if (user != null) {
             //TODO COMPLETE
             intent.putExtra("User", user);
             ApplicationController.getInstance().getUserController().addUser(user, this);
         }
 
-       startActivity(intent);
+        startActivity(intent);
     }
 }

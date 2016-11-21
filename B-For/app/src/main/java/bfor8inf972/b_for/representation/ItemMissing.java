@@ -19,7 +19,7 @@ public class ItemMissing implements Serializable {
 
     private boolean checked;
 
-    public ItemMissing(){
+    public ItemMissing() {
         this.id = -1;
 
         this.name = "UNKNOWN";
@@ -31,10 +31,10 @@ public class ItemMissing implements Serializable {
 
         this.user = new User();
 
-        this .checked = false;
+        this.checked = false;
     }
 
-    public ItemMissing(int id, String name, int quantity, int size, String metric, User user, boolean checked){
+    public ItemMissing(int id, String name, int quantity, int size, String metric, User user, boolean checked) {
         this.id = id;
 
         this.name = name;
@@ -52,11 +52,10 @@ public class ItemMissing implements Serializable {
     public ItemMissing(JsonElement json) {
         Gson gson = new Gson();
 
-        ItemMissing itemMissing= new ItemMissing();
+        ItemMissing itemMissing = new ItemMissing();
         try {
-            itemMissing = gson.fromJson(json,ItemMissing.class);
-        }
-        catch (Exception e){
+            itemMissing = gson.fromJson(json, ItemMissing.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -75,60 +74,50 @@ public class ItemMissing implements Serializable {
     }
 
     //(Serialization)
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         return json;
     }
 
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public int getId()
-    {
+    public int getId() {
         return id;
     }
 
-    public void setName(String name)
-    {
-        this.name = name;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setQuantity(int quantity)
-    {
-        this.quantity = quantity;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getQuantity()
-    {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setSize(int size)
-    {
-        this.size = size;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public int getSize()
-    {
+    public int getSize() {
         return size;
     }
 
-    public void setMetric(String metric)
-    {
-        this.metric = metric;
+    public void setSize(int size) {
+        this.size = size;
     }
 
-    public String getMetric()
-    {
+    public String getMetric() {
         return metric;
+    }
+
+    public void setMetric(String metric) {
+        this.metric = metric;
     }
 
     public User getUser() {
@@ -139,11 +128,11 @@ public class ItemMissing implements Serializable {
         this.user = user;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
     public boolean isChecked() {
         return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

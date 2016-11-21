@@ -20,8 +20,13 @@ import bfor8inf972.b_for.view.customViews.RemovableRowAdapter;
 
 public class CreateEventFragment extends Fragment {
 
+    Button date;
+    Button beginHour;
+    Button endHour;
+    RemovableRowAdapter removableRowAdapter;
+    ListView itemsToBring;
+    ArrayList<String> listItems;
     private OnFragmentInteractionListener mListener;
-
     public CreateEventFragment() {
         // Required empty public constructor
     }
@@ -37,20 +42,12 @@ public class CreateEventFragment extends Fragment {
         return fragment;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
     }
-
-    Button date;
-    Button beginHour;
-    Button endHour;
-    RemovableRowAdapter removableRowAdapter;
-    ListView itemsToBring;
-    ArrayList<String> listItems;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

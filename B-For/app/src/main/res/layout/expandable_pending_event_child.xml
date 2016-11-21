@@ -75,18 +75,18 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_green_light"
             android:text="@string/details"
-            android:textAllCaps="false"
-            android:backgroundTint="@android:color/holo_green_light"/>
+            android:textAllCaps="false" />
 
         <Button
             android:id="@+id/unparticipate_button"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="@android:color/holo_red_light"
             android:text="@string/cancelPending_button"
-            android:textAllCaps="false"
-            android:backgroundTint="@android:color/holo_red_light"/>
+            android:textAllCaps="false" />
 
 
     </LinearLayout>

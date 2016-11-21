@@ -35,8 +35,7 @@ public class User implements Serializable {
         this.address = "UNKNOWN";
     }
 
-    public User(String firstName,String lastName,String email, String id, String phone, int age, String address)
-    {
+    public User(String firstName, String lastName, String email, String id, String phone, int age, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
 
@@ -52,14 +51,13 @@ public class User implements Serializable {
 
     }
 
-    public User(JsonElement json){
+    public User(JsonElement json) {
         Gson gson = new Gson();
 
         User user = new User();
         try {
-        user =  gson.fromJson(json,User.class);
-        }
-        catch (Exception e){
+            user = gson.fromJson(json, User.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -78,29 +76,25 @@ public class User implements Serializable {
     }
 
     //(Serialization)
-    public String toJson(){
+    public String toJson() {
         Gson gson = new Gson();
         String json = gson.toJson(this);
         return json;
     }
 
-    public String getFirstName()
-    {
+    public String getFirstName() {
         return this.firstName;
     }
 
-    public void setFirstName(String firstName)
-    {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getLastName()
-    {
+    public String getLastName() {
         return this.lastName;
     }
 
-    public void setLastName(String lastName)
-    {
+    public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
@@ -108,49 +102,40 @@ public class User implements Serializable {
         return this.id;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
-    }
-
-    public String getEmail()
-    {
+    public String getEmail() {
         return email;
     }
 
-    public void setPhone(String phone)
-    {
-        this.phone = phone;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPhone()
-    {
+    public String getPhone() {
         return phone;
     }
 
-    public void setAge(int age)
-    {
-        this.age = age;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public int getAge()
-    {
+    public int getAge() {
         return age;
     }
 
-    public void setAddress(String address)
-    {
-        this.address = address;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getAddress()
-    {
+    public String getAddress() {
         return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

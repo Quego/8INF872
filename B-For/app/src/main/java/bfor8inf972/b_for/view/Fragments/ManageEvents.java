@@ -21,6 +21,14 @@ public class ManageEvents extends Fragment {
     public ManageEvents() {
     }
 
+    public static ManageEvents newInstance(String param1, String param2) {
+        ManageEvents fragment = new ManageEvents();
+        Bundle args = new Bundle();
+
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.fragment_manage_add, menu);
@@ -45,15 +53,6 @@ public class ManageEvents extends Fragment {
                 return super.onOptionsItemSelected(item);
 
         }
-    }
-
-
-    public static ManageEvents newInstance(String param1, String param2) {
-        ManageEvents fragment = new ManageEvents();
-        Bundle args = new Bundle();
-
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

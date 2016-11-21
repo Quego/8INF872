@@ -14,8 +14,7 @@ import java.util.Calendar;
 public class OnClickUtils {
 
     /**
-     *
-     * @param context where to show the view
+     * @param context        where to show the view
      * @param buttonToChange the button to be changed after choosing time
      * @return a clickListener which asks for a time and modifies the button text given in parameter
      */
@@ -40,8 +39,7 @@ public class OnClickUtils {
     }
 
     /**
-     *
-     * @param context where to show the view
+     * @param context        where to show the view
      * @param buttonToChange the button to be changed after choosing date
      * @return a clickListener which asks for a date and modifies the button text given in parameter
      */

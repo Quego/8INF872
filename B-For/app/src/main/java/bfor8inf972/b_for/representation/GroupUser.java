@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import java.util.HashSet;
-import java.util.Set;
 
 public class GroupUser {
     private int id;
@@ -13,7 +12,7 @@ public class GroupUser {
 
     GroupUser() {
         this.id = -1;
-        this.users =  new HashSet<User>();
+        this.users = new HashSet<User>();
         this.driver = new User();
     }
 
@@ -23,13 +22,12 @@ public class GroupUser {
         this.driver = driver;
     }
 
-    public GroupUser(JsonElement json){
+    public GroupUser(JsonElement json) {
         Gson gson = new Gson();
         GroupUser groupUser = new GroupUser();
         try {
             groupUser = gson.fromJson(json, GroupUser.class);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         this.id = groupUser.getId();
@@ -37,7 +35,7 @@ public class GroupUser {
         this.driver = groupUser.getDriver();
     }
 
-    public String toJson(){
+    public String toJson() {
         //TODO Test on object collections
         Gson gson = new Gson();
         String json = gson.toJson(this);
@@ -48,20 +46,20 @@ public class GroupUser {
         return this.id;
     }
 
-    public HashSet<User> getUsers() {
-        return this.users;
-    }
-
-    public User getDriver() {
-        return this.driver;
-    }
-
     public void setId(int id) {
         this.id = id;
     }
 
+    public HashSet<User> getUsers() {
+        return this.users;
+    }
+
     public void setUsers(HashSet<User> users) {
         this.users = users;
+    }
+
+    public User getDriver() {
+        return this.driver;
     }
 
     public void setDriver(User driver) {
