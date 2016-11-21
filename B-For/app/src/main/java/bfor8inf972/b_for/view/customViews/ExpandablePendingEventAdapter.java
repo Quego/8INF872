@@ -105,6 +105,13 @@ public class ExpandablePendingEventAdapter extends BaseExpandableListAdapter {
         TextView details = (TextView) view.findViewById(R.id.details);
         details.setText("TODO : ajouter des details pour un évènement");
 
+        TextView guestCount = (TextView) view.findViewById(R.id.guest_count);
+        guestCount.setText("Invités : " + party.getGuests().size()  + "/"+party.getMaxPeople() );
+
+        TextView sleepingGuests = (TextView) view.findViewById(R.id.sleeping_count);
+        sleepingGuests.setText("Invités dormant : " + party.getSleepingGuests().size()  + "/TODO" );
+
+
         //TODO
         ((Button) view.findViewById(R.id.unparticipate_button)).setOnClickListener(new View.OnClickListener() {
             @Override

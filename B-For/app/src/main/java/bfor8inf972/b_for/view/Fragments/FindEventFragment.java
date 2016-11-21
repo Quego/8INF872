@@ -16,10 +16,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.representation.Localization;
 import bfor8inf972.b_for.representation.Party;
+import bfor8inf972.b_for.representation.User;
 import bfor8inf972.b_for.view.customViews.ExpandableEventAdapter;
 
 
@@ -117,11 +119,11 @@ public class FindEventFragment extends Fragment {
 
     private void loadData() {
         eventList.clear();
-        eventList.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 5) );
-        eventList.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 100, 2) );
-        eventList.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 4) );
-        eventList.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
-        eventList.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
+        eventList.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 30, 5));
+        eventList.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 100, 2));
+        eventList.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 10, 4));
+        eventList.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 40, 3));
+        eventList.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 20, 1));
     }
 
 

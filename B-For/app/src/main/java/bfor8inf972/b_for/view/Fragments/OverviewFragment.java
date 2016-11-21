@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -19,11 +18,12 @@ import com.facebook.login.widget.ProfilePictureView;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.representation.Localization;
 import bfor8inf972.b_for.representation.Party;
-import bfor8inf972.b_for.view.customViews.ExpandableEventAdapter;
+import bfor8inf972.b_for.representation.User;
 import bfor8inf972.b_for.view.customViews.ExpandableMyEventAdapter;
 import bfor8inf972.b_for.view.customViews.ExpandableNextEventAdapter;
 import bfor8inf972.b_for.view.customViews.ExpandablePendingEventAdapter;
@@ -153,39 +153,33 @@ public class OverviewFragment extends Fragment {
     }
 
 
-
-
-
     private void loadMyEvents() {
         myEvents_list.clear();
+        myEvents_list.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 20, 5));
+        myEvents_list.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "La baie"), null, new HashSet<User>(), true, "17H", "23H", 100, 2));
+        myEvents_list.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Montréal"), null, new HashSet<User>(), true, "17H", "23H", 30, 4));
 
-        myEvents_list.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 5) );
-        myEvents_list.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 100, 2) );
-        myEvents_list.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 4) );
-
-       //addEvent(myEvents_list, "Grosse fête", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
-       //addEvent(myEvents_list, "Soirée Lan ", new Date(), "12 km", "Venez geeker avec moi, j'ai pas d'amis");
-       //addEvent(myEvents_list, "Soirée GOT ", new Date(), "12 km", "Pop corn, série, chill");
+        //addEvent(myEvents_list, "Grosse fête", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
+        //addEvent(myEvents_list, "Soirée Lan ", new Date(), "12 km", "Venez geeker avec moi, j'ai pas d'amis");
+        //addEvent(myEvents_list, "Soirée GOT ", new Date(), "12 km", "Pop corn, série, chill");
 
     }
 
     private void loadNextEvents() {
         nextEvents_list.clear();
-        nextEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
-        nextEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
+        nextEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 40, 3));
+        nextEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "La baie"), null, new HashSet<User>(), true, "17H", "23H", 20, 1));
 
 
-       //addEvent(nextEvents_list, "Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
-       //addEvent(nextEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
+        //addEvent(nextEvents_list, "Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
+        //addEvent(nextEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
     }
 
     private void loadPendingEvents() {
         pendingEvents_list.clear();
-        pendingEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 3) );
-        pendingEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, null, new Localization(0,"1","2","Chicoutimi"), null, null, true, "17H", "23H", 20, 1) );
+        pendingEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 10, 3));
+        pendingEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 60, 1));
     }
-
-
 
 
     @Override
