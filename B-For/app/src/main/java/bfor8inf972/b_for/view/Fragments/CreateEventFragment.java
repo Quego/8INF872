@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.Utils.OnClickUtils;
+import bfor8inf972.b_for.representation.Party;
 import bfor8inf972.b_for.view.customViews.RemovableRowAdapter;
 
 public class CreateEventFragment extends Fragment {
@@ -97,6 +98,18 @@ public class CreateEventFragment extends Fragment {
                 addEditText.requestFocus();
             }
         });
+
+
+        //Handle button create
+        Button createEvent = (Button) myFragmentView.findViewById(R.id.createEvent);
+        createEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Set party and send it to API
+                Party p = new Party();
+            }
+        });
+
         return myFragmentView;
     }
 

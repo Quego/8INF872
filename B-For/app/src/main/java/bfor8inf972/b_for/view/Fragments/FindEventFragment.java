@@ -67,6 +67,7 @@ public class FindEventFragment extends Fragment {
         inflater.inflate(R.menu.fragment_search_bar, menu);
         super.onCreateOptionsMenu(menu, inflater);
 
+        //create search view
         final MenuItem myActionMenuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setQueryHint(getString(R.string.search_bar));
@@ -109,6 +110,7 @@ public class FindEventFragment extends Fragment {
         // add data for displaying in expandable list view
         loadData();
 
+        //Handle event list
         events_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_events);
         events_listAdapter = new ExpandableEventAdapter(getContext(), eventList);
         events_expandableListView.setAdapter(events_listAdapter);

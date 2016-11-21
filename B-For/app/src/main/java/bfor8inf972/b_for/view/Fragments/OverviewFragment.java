@@ -33,7 +33,6 @@ public class OverviewFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-
     private ExpandableMyEventAdapter myEvents_listAdapter;
     private ExpandableListView myEvents_expandableListView;
     private ArrayList<Party> myEvents_list = new ArrayList<Party>();
@@ -76,23 +75,25 @@ public class OverviewFragment extends Fragment {
         // Inflate the layout for this fragment
         View myFragmentView = inflater.inflate(R.layout.fragment_overview, container, false);
 
+        //Handle user owned events
         loadMyEvents();
-
         myEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_myEvents);
         myEvents_listAdapter = new ExpandableMyEventAdapter(getContext(), myEvents_list);
         myEvents_expandableListView.setAdapter(myEvents_listAdapter);
-        loadNextEvents();
 
+        //Handle user next events
+        loadNextEvents();
         nextEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_nextEvents);
         nextEvents_listAdapter = new ExpandableNextEventAdapter(getContext(), nextEvents_list);
         nextEvents_expandableListView.setAdapter(nextEvents_listAdapter);
 
+        //Handle user event waiting for validation
         loadPendingEvents();
         pendingEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_pendingEvents);
         pendingEvents_listAdapter = new ExpandablePendingEventAdapter(getContext(), pendingEvents_list);
         pendingEvents_expandableListView.setAdapter(pendingEvents_listAdapter);
 
-
+        //Use setListViewHeight onClick because screen scrollview conflicts with ExpandableList scrollview
         myEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
@@ -120,11 +121,14 @@ public class OverviewFragment extends Fragment {
             }
         });
 
+        //Update height once
         myEvents_listAdapter.setListViewHeight(myEvents_expandableListView, -1);
         nextEvents_listAdapter.setListViewHeight(nextEvents_expandableListView, -1);
         pendingEvents_listAdapter.setListViewHeight(pendingEvents_expandableListView, -1);
 
         InitialiseProfilInfo(myFragmentView);
+
+        //Handle profile layout click
         ((LinearLayout) myFragmentView.findViewById(R.id.profile_layout)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,6 +141,10 @@ public class OverviewFragment extends Fragment {
         return myFragmentView;
     }
 
+    /**
+     *
+     * @param v the view where are defined recquired view
+     */
     private void InitialiseProfilInfo(View v) {
         TextView firstName = (TextView) v.findViewById(R.id.first_name);
         TextView lastName = (TextView) v.findViewById(R.id.last_name);
@@ -158,21 +166,12 @@ public class OverviewFragment extends Fragment {
         myEvents_list.add(new Party(0, "Grosse fête", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 20, 5));
         myEvents_list.add(new Party(0, "Soirée Lan", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "La baie"), null, new HashSet<User>(), true, "17H", "23H", 100, 2));
         myEvents_list.add(new Party(0, "Soirée GOT", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Montréal"), null, new HashSet<User>(), true, "17H", "23H", 30, 4));
-
-        //addEvent(myEvents_list, "Grosse fête", new Date(), "12 km", "Un appartement, 50 m², une table de beer-pong ...");
-        //addEvent(myEvents_list, "Soirée Lan ", new Date(), "12 km", "Venez geeker avec moi, j'ai pas d'amis");
-        //addEvent(myEvents_list, "Soirée GOT ", new Date(), "12 km", "Pop corn, série, chill");
-
     }
 
     private void loadNextEvents() {
         nextEvents_list.clear();
         nextEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 40, 3));
         nextEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "La baie"), null, new HashSet<User>(), true, "17H", "23H", 20, 1));
-
-
-        //addEvent(nextEvents_list, "Fin du monde", new Date(), "42 km", "La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! La fin du monde, la fin du monde ! ");
-        //addEvent(nextEvents_list, "C'est l'été", new Date(), "57 km", "Une piscine, des meufs, de l'alcool, soyez vous-même");
     }
 
     private void loadPendingEvents() {
@@ -180,7 +179,6 @@ public class OverviewFragment extends Fragment {
         pendingEvents_list.add(new Party(0, "Fin du monde", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 10, 3));
         pendingEvents_list.add(new Party(0, "C'est l'été", new Date().toString(), "now", null, new HashSet<User>(), new Localization(0, "1", "2", "Chicoutimi"), null, new HashSet<User>(), true, "17H", "23H", 60, 1));
     }
-
 
     @Override
     public void onAttach(Context context) {

@@ -37,6 +37,7 @@ public class ManageEvents extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //Handle add Event button
         switch (item.getItemId()) {
             case R.id.nav_addEvent:
 
