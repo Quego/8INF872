@@ -106,10 +106,10 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
         details.setText("TODO : ajouter des details pour un évènement");
 
         TextView guestCount = (TextView) view.findViewById(R.id.guest_count);
-        guestCount.setText("Invités : " + party.getGuests().size()  + "/"+party.getMaxPeople() );
+        guestCount.setText("Invités : " + party.getGuests().size() + "/" + party.getMaxPeople());
 
         TextView sleepingGuests = (TextView) view.findViewById(R.id.sleeping_count);
-        sleepingGuests.setText("Invités dormant : " + party.getSleepingGuests().size()  + "/TODO" );
+        sleepingGuests.setText("Invités dormant : " + party.getSleepingGuests().size() + "/TODO");
 
         //TODO
         ((Button) view.findViewById(R.id.manage_button)).setOnClickListener(new View.OnClickListener() {
@@ -138,27 +138,26 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
     }
 
     /**
-     *
      * @param listView the listView to resize
-     * Resize given ListView in Height since Listview Conflicts with its parent scrollview
+     *                 Resize given ListView in Height since Listview Conflicts with its parent scrollview
      */
     public void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableMyEventAdapter listAdapter = (ExpandableMyEventAdapter) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
-
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
             View groupItem = listAdapter.getGroupView(i, false, null, listView);
             groupItem.measure(0, 0);
 
             totalHeight += groupItem.getMeasuredHeight();
 
-            if (group != -1 && ((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
+            if (((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
                 View listItem = listAdapter.getChildView(i, 0, false, null, listView);
                 listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
                 totalHeight += listItem.getMeasuredHeight();
             }
         }
+
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
         listView.setLayoutParams(params);

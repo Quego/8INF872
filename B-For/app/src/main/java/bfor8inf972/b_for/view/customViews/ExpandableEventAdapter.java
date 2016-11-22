@@ -137,6 +137,7 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
      */
     public void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableEventAdapter listAdapter = (ExpandableEventAdapter) listView.getExpandableListAdapter();
+        listView.deferNotifyDataSetChanged();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
 

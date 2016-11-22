@@ -35,19 +35,22 @@ public class OverviewFragment extends Fragment {
 
     private ExpandableMyEventAdapter myEvents_listAdapter;
     private ExpandableListView myEvents_expandableListView;
-    private ArrayList<Party> myEvents_list = new ArrayList<Party>();
+    private ArrayList<Party> myEvents_list;
 
     private ExpandableNextEventAdapter nextEvents_listAdapter;
     private ExpandableListView nextEvents_expandableListView;
-    private ArrayList<Party> nextEvents_list = new ArrayList<Party>();
+    private ArrayList<Party> nextEvents_list;
 
     private ExpandablePendingEventAdapter pendingEvents_listAdapter;
     private ExpandableListView pendingEvents_expandableListView;
-    private ArrayList<Party> pendingEvents_list = new ArrayList<Party>();
+    private ArrayList<Party> pendingEvents_list;
 
 
     public OverviewFragment() {
         // Required empty public constructor
+        myEvents_list = new ArrayList<Party>();
+        nextEvents_list = new ArrayList<Party>();
+        pendingEvents_list = new ArrayList<Party>();
     }
 
     /**
@@ -88,6 +91,7 @@ public class OverviewFragment extends Fragment {
 
         //Handle user event waiting for validation
         loadPendingEvents();
+
         pendingEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_pendingEvents);
         pendingEvents_listAdapter = new ExpandablePendingEventAdapter(getContext(), pendingEvents_list);
         pendingEvents_expandableListView.setAdapter(pendingEvents_listAdapter);
@@ -95,8 +99,7 @@ public class OverviewFragment extends Fragment {
         //Use setListViewHeight onClick because screen scrollview conflicts with ExpandableList scrollview
         myEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 myEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
@@ -104,8 +107,7 @@ public class OverviewFragment extends Fragment {
 
         nextEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 nextEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
@@ -113,17 +115,18 @@ public class OverviewFragment extends Fragment {
 
         pendingEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                 pendingEvents_listAdapter.setListViewHeight(parent, groupPosition);
                 return false;
             }
         });
 
+
         //Update height once
         myEvents_listAdapter.setListViewHeight(myEvents_expandableListView, -1);
         nextEvents_listAdapter.setListViewHeight(nextEvents_expandableListView, -1);
         pendingEvents_listAdapter.setListViewHeight(pendingEvents_expandableListView, -1);
+
 
         InitialiseProfilInfo(myFragmentView);
 
@@ -141,7 +144,6 @@ public class OverviewFragment extends Fragment {
     }
 
     /**
-     *
      * @param v the view where are defined recquired view
      */
     private void InitialiseProfilInfo(View v) {

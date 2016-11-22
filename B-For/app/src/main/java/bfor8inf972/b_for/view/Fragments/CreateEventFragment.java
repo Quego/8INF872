@@ -108,6 +108,7 @@ public class CreateEventFragment extends Fragment {
         date = (Button) myFragmentView.findViewById(R.id.select_date);
         date.setOnClickListener(new OnClickUtils().createDatePickerListener(getContext(), date));
 
+
         //Handle start Time button
         beginHour = (Button) myFragmentView.findViewById(R.id.select_time_start);
         beginHour.setOnClickListener(new OnClickUtils().createTimePickerListener(getContext(), beginHour));
