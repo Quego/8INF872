@@ -1,8 +1,14 @@
 package bfor8inf972.b_for.view.Fragments;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +19,11 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RatingBar;
 import android.widget.Toast;
+
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,6 +38,8 @@ public class CreateEventFragment extends Fragment {
     Button date;
     Button beginHour;
     Button endHour;
+    Button pickLocation;
+    EditText addEditText;
     EditText maxPeople;
     EditText maxSleepinPeople;
     RatingBar recquiredStars;
@@ -35,6 +48,9 @@ public class CreateEventFragment extends Fragment {
     RemovableRowAdapter removableRowAdapter;
     ListView itemsToBring;
     ArrayList<String> listItems;
+
+    int PLACE_PICKER_REQUEST = 1;
+    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
     private OnFragmentInteractionListener mListener;
 
@@ -57,6 +73,21 @@ public class CreateEventFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+        }
+    }
+
+
+    public boolean askPermission(String permissionToAsk) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (getActivity().checkSelfPermission(permissionToAsk)
+                    == PackageManager.PERMISSION_GRANTED) {
+                return true;
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permissionToAsk}, 1);
+                return false;
+            }
+        } else { //permission is automatically granted on sdk<23 upon installation
+            return true;
         }
     }
 
@@ -98,7 +129,7 @@ public class CreateEventFragment extends Fragment {
         removableRowAdapter.setListViewHeight(itemsToBring);
 
         Button buttonAdd = (Button) footer.findViewById(R.id.footer_buttonAdd);
-        final EditText addEditText = (EditText) footer.findViewById(R.id.footer_editText);
+        addEditText = (EditText) footer.findViewById(R.id.footer_editText);
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +146,22 @@ public class CreateEventFragment extends Fragment {
             }
         });
 
+
+        pickLocation = (Button) myFragmentView.findViewById(R.id.location_button);
+        pickLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (askPermission(Manifest.permission.ACCESS_FINE_LOCATION) && askPermission(Manifest.permission.INTERNET)) {
+                    try {
+                        startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                    } catch (GooglePlayServicesRepairableException e) {
+                        e.printStackTrace();
+                    } catch (GooglePlayServicesNotAvailableException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
 
         //Handle button create
         Button createEvent = (Button) myFragmentView.findViewById(R.id.createEvent);
@@ -149,8 +196,17 @@ public class CreateEventFragment extends Fragment {
                 }
             }
         });
-
         return myFragmentView;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == Activity.RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, getContext());
+                pickLocation.setText(place.getAddress());
+            }
+        }
     }
 
 

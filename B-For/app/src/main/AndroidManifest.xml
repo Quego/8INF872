@@ -3,6 +3,7 @@
     package="bfor8inf972.b_for">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 
@@ -15,6 +16,10 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDSHYN0xAhl3U0pNWkQtlBBDQIF0sLlyL4"/>
+
 
         <activity
             android:name=".view.AuthenticationActivity"
