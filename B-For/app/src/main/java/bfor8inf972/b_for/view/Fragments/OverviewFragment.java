@@ -57,7 +57,6 @@ public class OverviewFragment extends Fragment {
     public static OverviewFragment newInstance(String param1, String param2) {
         OverviewFragment fragment = new OverviewFragment();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
