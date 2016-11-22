@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -85,13 +86,13 @@ public class HomeActivity extends AppCompatActivity
                     replace(R.id.FragmentContainer, overviewFragment)
                     .commit();
             currentFragmentName = getResources().getString(R.string.overview_title);
+            currentFragmentID = R.id.nav_overview;
         }
 
         //get restored data
         if (savedInstanceState != null) {
             currentFragmentName = savedInstanceState.getString("currentFragmentName");
         }
-        getSupportActionBar().setTitle(currentFragmentName);
     }
 
     private void InitialiseUserInfo(View v) {
@@ -117,10 +118,6 @@ public class HomeActivity extends AppCompatActivity
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        //Change Title when pushing back button
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportActionBar().setTitle(getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1).getName());
-        }
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -167,13 +164,11 @@ public class HomeActivity extends AppCompatActivity
                         .commit();
                 currentFragmentName = getResources().getString(R.string.overview_title);
             }
-            getSupportActionBar().setTitle(currentFragmentName);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     public void onFragmentInteraction(Uri uri) {

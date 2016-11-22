@@ -29,6 +29,7 @@
     <string name="cancelPending_button">Annuler ma demande</string>
     <string name="manage_button">Gérer</string>
     <string name="cancelEvent_button">Supprimer</string>
+    <string name="create_event_title">Créer mon évènement</string>
 
 
 </resources>

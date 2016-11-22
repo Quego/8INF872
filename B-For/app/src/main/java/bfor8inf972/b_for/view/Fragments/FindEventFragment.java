@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -105,6 +106,8 @@ public class FindEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.findEvent_title);
+
         View myFragmentView = inflater.inflate(R.layout.fragment_find_event, container, false);
 
         // add data for displaying in expandable list view
