@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -83,9 +82,14 @@ public class OverviewFragment extends Fragment {
 
         //Handle user owned events
         loadMyEvents();
+
         myEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_myEvents);
-        myEvents_listAdapter = new ExpandableMyEventAdapter(getContext(), myEvents_list);
+        if(myEvents_listAdapter==null)
+        myEvents_listAdapter = new ExpandableMyEventAdapter(myEvents_expandableListView, getContext(), myEvents_list);
+        else
+            myEvents_listAdapter.setParentView(myEvents_expandableListView);
         myEvents_expandableListView.setAdapter(myEvents_listAdapter);
+
 
         //Handle user next events
         loadNextEvents();
@@ -96,18 +100,14 @@ public class OverviewFragment extends Fragment {
         //Handle user event waiting for validation
         loadPendingEvents();
 
-        pendingEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_pendingEvents);
-        pendingEvents_listAdapter = new ExpandablePendingEventAdapter(getContext(), pendingEvents_list);
-        pendingEvents_expandableListView.setAdapter(pendingEvents_listAdapter);
+            pendingEvents_expandableListView = (ExpandableListView) myFragmentView.findViewById(R.id.expandableListView_pendingEvents);
+            pendingEvents_listAdapter = new ExpandablePendingEventAdapter(getContext(), pendingEvents_list);
+            pendingEvents_expandableListView.setAdapter(pendingEvents_listAdapter);
+
+
 
         //Use setListViewHeight onClick because screen scrollview conflicts with ExpandableList scrollview
-        myEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                myEvents_listAdapter.setListViewHeight(parent, groupPosition);
-                return false;
-            }
-        });
+
 
         nextEvents_expandableListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
             @Override

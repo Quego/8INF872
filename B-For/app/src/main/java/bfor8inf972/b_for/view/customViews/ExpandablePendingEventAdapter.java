@@ -79,7 +79,6 @@ public class ExpandablePendingEventAdapter extends BaseExpandableListAdapter {
         }
 
         TextView title = (TextView) view.findViewById(R.id.event_title);
-        System.out.println(title);
         title.setText(party.getTitle().trim());
 
         TextView date = (TextView) view.findViewById(R.id.event_date);

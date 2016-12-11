@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.representation.Party;
@@ -22,11 +23,19 @@ import bfor8inf972.b_for.representation.Party;
  */
 public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
 
-
+    private ExpandableListView parentView;
+    private HashSet<Integer> expandedGroups;
     private Context context;
     private ArrayList<Party> parties;
 
-    public ExpandableMyEventAdapter(Context context, ArrayList<Party> parties) {
+    public void setParentView(ExpandableListView parentView)
+    {
+        this.parentView=parentView;
+    }
+
+    public ExpandableMyEventAdapter(ExpandableListView parentView, Context context, ArrayList<Party> parties) {
+        this.parentView = parentView;
+        this.expandedGroups = new HashSet<>();
         this.context = context;
         this.parties = parties;
     }
@@ -137,6 +146,18 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
         return true;
     }
 
+    @Override
+    public void onGroupExpanded(int groupPosition) {
+        expandedGroups.add(groupPosition);
+        setListViewHeight(parentView ,  groupPosition);
+    }
+
+    @Override
+    public void onGroupCollapsed(int groupPosition) {
+        expandedGroups.remove(groupPosition);
+        setListViewHeight(parentView,  groupPosition);
+    }
+
     /**
      * @param listView the listView to resize
      *                 Resize given ListView in Height since Listview Conflicts with its parent scrollview
@@ -144,14 +165,15 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
     public void setListViewHeight(ExpandableListView listView, int group) {
         ExpandableMyEventAdapter listAdapter = (ExpandableMyEventAdapter) listView.getExpandableListAdapter();
         int totalHeight = 0;
+        int cpt = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.EXACTLY);
+
         for (int i = 0; i < listAdapter.getGroupCount(); i++) {
             View groupItem = listAdapter.getGroupView(i, false, null, listView);
             groupItem.measure(0, 0);
 
             totalHeight += groupItem.getMeasuredHeight();
-
-            if (((listView.isGroupExpanded(i)) && (i != group)) || ((!listView.isGroupExpanded(i)) && (i == group))) {
+            if (expandedGroups.contains(i)) {
                 View listItem = listAdapter.getChildView(i, 0, false, null, listView);
                 listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
                 totalHeight += listItem.getMeasuredHeight();
@@ -162,4 +184,5 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
         params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
         listView.setLayoutParams(params);
     }
+
 }
