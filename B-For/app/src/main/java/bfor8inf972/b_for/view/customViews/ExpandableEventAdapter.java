@@ -116,7 +116,7 @@ public class ExpandableEventAdapter extends BaseExpandableListAdapter {
         ((Button) view.findViewById(R.id.participate_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(v.getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });

@@ -114,7 +114,7 @@ public class ExpandableNextEventAdapter extends BaseExpandableListAdapter {
         ((Button) view.findViewById(R.id.unparticipate_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(v.getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -123,7 +123,7 @@ public class ExpandableNextEventAdapter extends BaseExpandableListAdapter {
         ((Button) view.findViewById(R.id.details_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(v.getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });

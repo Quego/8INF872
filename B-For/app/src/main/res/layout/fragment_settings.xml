@@ -6,12 +6,6 @@
     tools:context="bfor8inf972.b_for.view.Fragments.SettingsFragment">
 
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="Rayon de recherche évènements proches : (50km)" />
-
     <Button
         android:id="@+id/logout"
         android:layout_width="wrap_content"

@@ -4,11 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -31,27 +28,25 @@ import java.util.Date;
 
 import bfor8inf972.b_for.R;
 import bfor8inf972.b_for.Utils.OnClickUtils;
+import bfor8inf972.b_for.Utils.PermissionUtils;
 import bfor8inf972.b_for.representation.Party;
 import bfor8inf972.b_for.view.customViews.RemovableRowAdapter;
 
 public class CreateEventFragment extends Fragment {
 
-    Button date;
-    Button beginHour;
-    Button endHour;
-    Button pickLocation;
-    EditText addEditText;
-    EditText maxPeople;
-    EditText maxSleepinPeople;
-    RatingBar recquiredStars;
-    AutoCompleteTextView detailsField;
+    private Button date;
+    private Button beginHour;
+    private Button endHour;
+    private Button pickLocation;
+    private EditText addEditText;
+    private EditText maxPeople;
+    private EditText maxSleepinPeople;
+    private RatingBar recquiredStars;
+    private AutoCompleteTextView detailsField;
 
-    RemovableRowAdapter removableRowAdapter;
-    ListView itemsToBring;
-    ArrayList<String> listItems;
-
-    int PLACE_PICKER_REQUEST = 1;
-    PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+    private RemovableRowAdapter removableRowAdapter;
+    private ListView itemsToBring;
+    private ArrayList<String> listItems;
 
     private OnFragmentInteractionListener mListener;
 
@@ -78,24 +73,10 @@ public class CreateEventFragment extends Fragment {
     }
 
 
-    public boolean askPermission(String permissionToAsk) {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (getActivity().checkSelfPermission(permissionToAsk)
-                    == PackageManager.PERMISSION_GRANTED) {
-                return true;
-            } else {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{permissionToAsk}, 1);
-                return false;
-            }
-        } else { //permission is automatically granted on sdk<23 upon installation
-            return true;
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.create_event_title);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.create_event_title);
 
         View myFragmentView = inflater.inflate(R.layout.fragment_create_event, container, false);
 
@@ -154,9 +135,9 @@ public class CreateEventFragment extends Fragment {
         pickLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (askPermission(Manifest.permission.ACCESS_FINE_LOCATION) && askPermission(Manifest.permission.INTERNET)) {
+                if (PermissionUtils.askPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) && PermissionUtils.askPermission(getActivity(), Manifest.permission.INTERNET)) {
                     try {
-                        startActivityForResult(builder.build(getActivity()), PLACE_PICKER_REQUEST);
+                        startActivityForResult(PermissionUtils.builder.build(getActivity()), PermissionUtils.PLACE_PICKER_REQUEST);
                     } catch (GooglePlayServicesRepairableException e) {
                         e.printStackTrace();
                     } catch (GooglePlayServicesNotAvailableException e) {
@@ -176,7 +157,12 @@ public class CreateEventFragment extends Fragment {
                 Party p = new Party();
                 //TODO add date
                 //p.setDate(date.getText());
-                p.setMaxPeople(Integer.parseInt(maxPeople.getText().toString()));
+                try {
+                    p.setMaxPeople(Integer.parseInt(maxPeople.getText().toString()));
+                }
+                catch (Exception e){
+                    p.setMaxPeople(0);
+                }
                 //TODO add maxSleeping
                 //p.setMaxPeopleSleeping(Integer.parseInt(maxSleepinPeople.getText().toString()));
                 p.setStartingHour(beginHour.getText().toString());
@@ -193,6 +179,8 @@ public class CreateEventFragment extends Fragment {
 
                 if (p.validateImportantFields()) {
                     //TODO speak with API
+                    Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
+                    toast.show();
                 } else {
                     Toast toast = Toast.makeText(v.getContext(), "Veuillez compléter tous les champs ", Toast.LENGTH_LONG);
                     toast.show();
@@ -204,7 +192,7 @@ public class CreateEventFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
+        if (requestCode == PermissionUtils.PLACE_PICKER_REQUEST) {
             if (resultCode == Activity.RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, getContext());
                 pickLocation.setText(place.getAddress());

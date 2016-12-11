@@ -124,7 +124,7 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
         ((Button) view.findViewById(R.id.manage_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(v.getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -133,7 +133,7 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
         ((Button) view.findViewById(R.id.cancel_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(v.getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(v.getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -174,6 +174,7 @@ public class ExpandableMyEventAdapter extends BaseExpandableListAdapter {
 
             totalHeight += groupItem.getMeasuredHeight();
             if (expandedGroups.contains(i)) {
+                System.out.println("----------- CONTAINS");
                 View listItem = listAdapter.getChildView(i, 0, false, null, listView);
                 listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
                 totalHeight += listItem.getMeasuredHeight();

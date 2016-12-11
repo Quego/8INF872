@@ -139,7 +139,7 @@ public class OverviewFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //TODO
-                Toast toast = Toast.makeText(getContext(), "Please change action in " + this.getClass(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getContext(), "Communiquer avec l'API dans : " + this.getClass(), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
